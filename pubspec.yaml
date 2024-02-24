@@ -19,6 +19,9 @@ dependencies:
   flutter_pretty_dio_logger: ^3.0.0
   path_provider: ^2.1.2
   get: ^4.6.6
+  carousel_slider: ^4.2.1
+  flutter_speed_dial: ^7.0.0
+  badges: ^3.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

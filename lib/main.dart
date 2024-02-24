@@ -35,7 +35,7 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
     return MaterialApp(
       title: '',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
       builder: (BuildContext context, Widget? child) {

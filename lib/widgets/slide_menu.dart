@@ -23,45 +23,46 @@ class SlideMenuState extends State<SlideMenu> {
     // TODO: implement build
     return Consumer<StatesProvider>(builder: (build, states, child) {
       return Drawer(
-        child: Container(
-            decoration: BoxDecoration(color: Colors.white),
-            child: Column(
-              children: [
-                UserAccountsDrawerHeader(
-                  margin: EdgeInsets.zero,
-                  accountName: Text('鹏鹏要赚一百万鸭'),
-                  accountEmail: Text('i@cctv3.net'),
-                  currentAccountPicture: ClipRRect(
-                      borderRadius: BorderRadius.circular(36.w),
-                      child: Image.network(
-                        'https://blog.cctv3.net/i.jpg',
-                        width: 72.w,
-                        height: 72.w,
-                      )),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          //colorFilter: ColorFilter.matrix(X().useGreyImageFilter()),
-                          fit: BoxFit.cover,
-                          image:
-                              NetworkImage(states.bingWallPaper['image_url']))),
-                ),
-                Expanded(
-                    child: ListView(padding: EdgeInsets.zero, children: [
-                  Column(
-                    children: DrawerMenu.loadDrawerMenus()
-                        .map((e) => ListTile(
-                              title: Text(e.name),
-                              leading: Icon(e.icon),
-                              onTap: () {
-                                x.useToast('${e.name}: ${e.id}');
-                              },
-                            ))
-                        .toList(),
-                  )
-                ]))
-              ],
-            )),
-      );
+          child: Container(
+        decoration: BoxDecoration(color: Colors.white),
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              margin: EdgeInsets.zero,
+              accountName: Text('鹏鹏要赚一百万鸭'),
+              accountEmail: Text('i@cctv3.net'),
+              currentAccountPicture: ClipRRect(
+                  borderRadius: BorderRadius.circular(36.w),
+                  child: Image.network(
+                    'https://blog.cctv3.net/i.jpg',
+                    width: 72.w,
+                    height: 72.w,
+                  )),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      //colorFilter: ColorFilter.matrix(X().useGreyImageFilter()),
+                      fit: BoxFit.cover,
+                      image: NetworkImage(states.bingWallPaper['image_url']))),
+            ),
+            Expanded(
+                child: ListView(padding: EdgeInsets.zero, children: [
+              Column(
+                children: DrawerMenu.loadDrawerMenus()
+                    .map((e) => Material(
+                          child: ListTile(
+                            splashColor: Color.fromRGBO(0, 0, 0, 0.08),
+                            leading: Icon(e.icon),
+                            title: Text(e.name),
+                            tileColor: Colors.white,
+                            onTap: () {},
+                          ),
+                        ))
+                    .toList(),
+              )
+            ]))
+          ],
+        ),
+      ));
     });
   }
 
