@@ -78,6 +78,9 @@ class HomePageState extends State<HomePage> {
           return Container(
             child: ListView(
               children: [
+                SizedBox(
+                  height: 6,
+                ),
                 HomeNotice(),
                 Container(
                   width: double.infinity,

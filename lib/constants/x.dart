@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class x {
@@ -108,5 +111,25 @@ class x {
       dir = folder.path;
     }
     return dir;
+  }
+
+  static checkPhotoPermission() async {
+    bool result = false;
+    if (Platform.isAndroid) {
+      // Only check for storage < Android 13
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        bool video = await Permission.videos.status.isGranted;
+        bool photo = await Permission.photos.status.isGranted;
+        result = video && photo;
+      } else {
+        result = await Permission.storage.status.isGranted;
+      }
+    } else if (Platform.isIOS) {
+      result = await Permission.photos.isGranted ||
+          await Permission.photos.isLimited;
+    }
+    return result;
   }
 }
