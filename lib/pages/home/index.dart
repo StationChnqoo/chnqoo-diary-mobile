@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
@@ -124,7 +125,7 @@ class HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(12),
                     child: Center(
                       child: Text(
-                        '已经到底啦 ~',
+                        "",
                         style: TextStyle(color: Colors.black38, fontSize: 12),
                       ),
                     ))

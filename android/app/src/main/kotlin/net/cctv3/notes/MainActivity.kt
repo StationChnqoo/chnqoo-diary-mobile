@@ -1,4 +1,4 @@
-package com.example.chnqoo_diary_mobile
+package net.cctv3.notes
 
 import io.flutter.embedding.android.FlutterActivity
 
