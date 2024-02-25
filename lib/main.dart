@@ -1,9 +1,10 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
-import 'package:chnqoo_diary_mobile/pages/home/index.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +33,10 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
     ScreenUtil.init(context, designSize: const Size(375, 667));
-    return MaterialApp(
+    return GetMaterialApp(
       title: '',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreenAccent),
         useMaterial3: true,
       ),
       builder: (BuildContext context, Widget? child) {
@@ -51,7 +52,8 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
         }
         return newWidget;
       },
-      home: const HomePage(title: 'StationChnqooDiaryMobile'),
+      initialRoute: RoutesClass.HOME,
+      getPages: RoutesClass.routes,
     );
   }
 }

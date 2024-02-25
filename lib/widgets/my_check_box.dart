@@ -17,6 +17,11 @@ class MyCheckBox extends StatelessWidget {
     return SizedBox(
         height: size,
         width: size,
-        child: Checkbox(value: value, onChanged: onChanged));
+        child: Checkbox(
+          value: value,
+          onChanged: onChanged,
+          // checkColor: Colors.green,
+          // activeColor: Colors.green,
+        ));
   }
 }

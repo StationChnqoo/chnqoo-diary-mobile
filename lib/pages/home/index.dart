@@ -5,6 +5,7 @@ import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/dates.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/motions.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/notes.dart';
+import 'package:chnqoo_diary_mobile/pages/home/widgets/notice.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/search_bar.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
@@ -17,25 +18,16 @@ import 'package:provider/provider.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  int _counter = 0;
   ScrollController? swiper;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   StatesProvider statesProvider = StatesProvider();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +37,8 @@ class HomePageState extends State<HomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           automaticallyImplyLeading: false,
           leading: null,
+          elevation: 12,
+          shadowColor: Colors.black.withOpacity(.618),
           flexibleSpace: Container(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).padding.top, left: 12, right: 12),
@@ -84,6 +78,7 @@ class HomePageState extends State<HomePage> {
           return Container(
             child: ListView(
               children: [
+                HomeNotice(),
                 Container(
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),

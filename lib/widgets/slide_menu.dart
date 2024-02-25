@@ -2,9 +2,12 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:chnqoo_diary_mobile/constants/drawer_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
+import 'package:chnqoo_diary_mobile/pages/permission/index.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +21,10 @@ class SlideMenu extends StatefulWidget {
 class SlideMenuState extends State<SlideMenu> {
   StatesProvider statesProvider = StatesProvider();
 
+  onMenuPress(DrawerMenu menu) {
+    Get.toNamed(menu.id);
+  }
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -54,7 +61,8 @@ class SlideMenuState extends State<SlideMenu> {
                             leading: Icon(e.icon),
                             title: Text(e.name),
                             tileColor: Colors.white,
-                            onTap: () {},
+                            onTap: () => onMenuPress(e),
+                            minVerticalPadding: 5,
                           ),
                         ))
                     .toList(),
