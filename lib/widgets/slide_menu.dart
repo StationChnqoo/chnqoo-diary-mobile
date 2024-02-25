@@ -1,6 +1,7 @@
 import 'package:chnqoo_diary_mobile/constants/drawer_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class SlideMenuState extends State<SlideMenu> {
               currentAccountPicture: ClipRRect(
                   borderRadius: BorderRadius.circular(36.w),
                   child: Image.network(
-                    'https://blog.cctv3.net/i.jpg',
+                    '${dotenv.get("CDN")}/i.jpg',
                     width: 72.w,
                     height: 72.w,
                   )),

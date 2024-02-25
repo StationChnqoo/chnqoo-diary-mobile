@@ -9,7 +9,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     // TODO: implement build
     return AppBar(
       centerTitle: true,
-      elevation: 6,
+      elevation: 2,
       shadowColor: Colors.black.withOpacity(.58),
       title: Text(
         title,

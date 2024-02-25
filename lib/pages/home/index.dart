@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
@@ -10,13 +9,16 @@ import 'package:chnqoo_diary_mobile/pages/home/widgets/notice.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/search_bar.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -63,13 +65,16 @@ class HomePageState extends State<HomePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(22.w),
                         child: Image.network(
-                          'https://blog.cctv3.net/i.jpg',
+                          '${dotenv.get("CDN")}/i.jpg',
                           height: 44.w,
                           width: 44.w,
                           fit: BoxFit.fill,
                         ),
                       ),
-                      onTap: () => scaffoldKey.currentState?.openDrawer(),
+                      onTap: () {
+                        // scaffoldKey.currentState?.openDrawer();
+                        Get.toNamed(RoutesClass.LOGIN);
+                      },
                     ),
                   ],
                 ),
@@ -103,7 +108,7 @@ class HomePageState extends State<HomePage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Image.network(
-                                'https://cloud.cctv3.net/Staging/home-banner-${i}.jpg',
+                                '${dotenv.get('CDN')}/home-banner-${i}.jpg',
                                 width: MediaQuery.of(context).size.width - 24,
                                 height: double.maxFinite,
                                 fit: BoxFit.fill,

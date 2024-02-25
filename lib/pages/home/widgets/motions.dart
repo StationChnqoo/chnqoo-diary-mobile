@@ -1,5 +1,6 @@
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeMotions extends StatelessWidget {
@@ -60,7 +61,7 @@ class HomeMotions extends StatelessWidget {
                             width: 6,
                           ),
                           Image.network(
-                            'https://cloud.cctv3.net/Staging/wechat/%E5%90%83%E7%93%9C.png',
+                            '${dotenv.get('CDN')}/wechat/%E5%90%83%E7%93%9C.png',
                             height: 18,
                           ),
                         ],

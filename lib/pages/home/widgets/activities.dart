@@ -1,6 +1,7 @@
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -56,7 +57,7 @@ class HomeActivities extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            'https://cloud.cctv3.net/Staging/activity-1.jpg',
+                            '${dotenv.get("CDN")}/activity-1.jpg',
                             height: 72.w,
                             width: 72.w,
                           ),

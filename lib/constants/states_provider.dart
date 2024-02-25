@@ -4,16 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 
-/** 只约束一下是否为 null 来判断是不是填了收货地址就行了 */
-final DEFAULT_ADDRESS = {
-  'province': null,
-  'city': null,
-  'area': null,
-  'detail': '',
-  'name': '',
-  'mobile': '',
-};
-
 final DEFAULT_BING_WALL_PAPER = {
   "date": "2023-08-19",
   "headline": "我准备好拍特写了，松鼠先生",
@@ -34,11 +24,6 @@ class StatesProvider extends ChangeNotifier {
   dynamic bingWallPaper = DEFAULT_BING_WALL_PAPER;
   dynamic setting = DEFAULT_SETTING;
   dynamic account = DEFAULT_ACCOUNT;
-  List activities = [];
-  List trucks = [];
-  dynamic from = DEFAULT_ADDRESS;
-  dynamic to = DEFAULT_ADDRESS;
-  int truck = 0;
 
   StatesProvider() {
     if (isReadedCaches) {
@@ -58,11 +43,6 @@ class StatesProvider extends ChangeNotifier {
         'bingWallPaper': bingWallPaper,
         'setting': setting,
         'account': account,
-        'activities': activities,
-        'trucks': trucks,
-        'truck': truck,
-        'from': from,
-        'to': to,
       });
       myBox.putAll(variables);
       myBox.put('version', Config.HIVE_VERSION);
@@ -70,11 +50,6 @@ class StatesProvider extends ChangeNotifier {
     bingWallPaper = myBox.get('bingWallPaper');
     setting = myBox.get('setting');
     account = myBox.get('account');
-    activities = myBox.get('activities');
-    trucks = myBox.get('trucks');
-    truck = myBox.get('truck');
-    from = myBox.get('from');
-    to = myBox.get('to');
     x.usePrint(
       'StatesProvider: ',
       "Caches database initialized in ${stopwatch.elapsedMilliseconds}ms.",
@@ -98,32 +73,5 @@ class StatesProvider extends ChangeNotifier {
   void setBingWallPaper(dynamic value) {
     bingWallPaper = value;
     writeCache('bingWallPaper', value);
-  }
-
-  void setTrucks(List value) {
-    trucks = value;
-    writeCache('trucks', value);
-    // Logger().i(cacheTrucks);
-  }
-
-  void setActivities(List list) {
-    activities = list;
-    writeCache('activities', list);
-  }
-
-  void setFrom(dynamic params) {
-    from = params;
-    x.usePrint('StatesProvider.setFrom: ', params);
-    writeCache('from', params);
-  }
-
-  void setTo(dynamic params) {
-    to = params;
-    writeCache('to', params);
-  }
-
-  void setTruck(dynamic params) {
-    truck = params;
-    writeCache('truck', params);
   }
 }
