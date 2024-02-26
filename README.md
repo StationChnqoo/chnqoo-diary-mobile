@@ -54,6 +54,9 @@ static String useConfigDotenvFile(String package) {
 }
 ```
 
+### Web
+网络图片跨域不显示，需要加参数`--web-browser-flag "--disable-web-security"`
+
 ## Thanks
 
 - Material Design 3 https://www.fluttericon.cn/
