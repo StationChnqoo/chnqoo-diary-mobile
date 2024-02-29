@@ -1,9 +1,18 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Config {
   static String HIVE_VERSION = "0.0.3";
   static String HIVE_BOX = "myBox";
+  /** Command variables */
   static const String APP_PACKAGE_NAME =
       String.fromEnvironment('APP_PACKAGE_NAME');
   static const String APP_NAME = String.fromEnvironment('APP_NAME');
+
+  /** Dotenv */
+  static String ENV = dotenv.get('ENV');
+  static String CDN = dotenv.get('CDN');
+  static String SERVER = dotenv.get('SERVER');
+  static String COMMON_SERVER = dotenv.get('COMMON_SERVER');
 
   /** 映射Config文件 */
   static String useConfigDotenvFile(String package) {

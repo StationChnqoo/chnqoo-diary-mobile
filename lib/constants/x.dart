@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:crypto/crypto.dart';
 
 class x {
   static useCDN(String url, int width) {
@@ -131,5 +132,9 @@ class x {
           await Permission.photos.isLimited;
     }
     return result;
+  }
+
+  static String useMD5(String s) {
+    return md5.convert(utf8.encode('Chnqoo@t:${s}')).toString();
   }
 }

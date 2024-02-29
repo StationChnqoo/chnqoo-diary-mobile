@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
@@ -128,9 +129,13 @@ class HomePageState extends State<HomePage> {
                 HomeActivities(),
                 Container(
                     margin: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
                     child: Center(
                       child: Text(
-                        "",
+                        'Env: ${dotenv.get('ENV')}',
                         style: TextStyle(color: Colors.black38, fontSize: 12),
                       ),
                     ))
@@ -188,23 +193,7 @@ class HomePageState extends State<HomePage> {
   }
 
   loadBingPicture() async {
-    var dio = Dio();
-    // dio.interceptors.add(PrettyDioLogger());
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        queryParameters: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
-        showProcessingTime: true,
-        showCUrl: true,
-        // canShowLog: kDebugMode,
-      ),
-    );
-    var result = await dio.get(
-        'https://mouday.github.io/wallpaper-database/${x.usePreviousDay(1)}.json');
+    var result = await new Services().selectBingWallPaper();
     statesProvider.setBingWallPaper(result.data);
   }
 
