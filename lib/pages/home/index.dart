@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
@@ -12,10 +13,8 @@ import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
@@ -32,6 +31,14 @@ class HomePageState extends State<HomePage> {
   ScrollController? swiper;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   StatesProvider statesProvider = StatesProvider();
+
+  onMinePress() {
+    if (statesProvider.account?['id'] == null) {
+      Get.toNamed(RoutesClass.LOGIN);
+    } else {
+      scaffoldKey.currentState?.openDrawer();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +73,15 @@ class HomePageState extends State<HomePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(22.w),
                         child: Image.network(
-                          '${dotenv.get("CDN")}/i.jpg',
+                          x.useAorB(statesProvider.account?['avatar'],
+                              '${Config.CDN}/i.png'),
                           height: 44.w,
                           width: 44.w,
                           fit: BoxFit.fill,
                         ),
                       ),
                       onTap: () {
-                        // scaffoldKey.currentState?.openDrawer();
-                        Services().selectTest();
-                        Get.toNamed(RoutesClass.LOGIN);
+                        onMinePress();
                       },
                     ),
                   ],

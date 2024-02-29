@@ -1,5 +1,7 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/drawer_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
+import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,23 +28,31 @@ class SlideMenuState extends State<SlideMenu> {
     return Consumer<StatesProvider>(builder: (build, states, child) {
       return Drawer(
           child: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
         child: Column(
           children: [
             UserAccountsDrawerHeader(
               margin: EdgeInsets.zero,
-              accountName: Text('鹏鹏要赚一百万鸭'),
-              accountEmail: Text('i@cctv3.net'),
+              accountName:
+                  Text(x.useAorB(statesProvider.account?['nickname'], '请登录 ~')),
+              accountEmail: Text('笔记号码: ' +
+                  (statesProvider.account?['idQoo']?.toString() ??
+                      '登录后才能拥有 ~')),
               currentAccountPicture: ClipRRect(
                   borderRadius: BorderRadius.circular(36.w),
                   child: Image.network(
-                    '${dotenv.get("CDN")}/i.jpg',
+                    x.useAorB(statesProvider.account?['avatar'],
+                        '${Config.CDN}/i.png'),
                     width: 72.w,
                     height: 72.w,
                   )),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      //colorFilter: ColorFilter.matrix(X().useGreyImageFilter()),
+                      // colorFilter: ColorFilter.matrix(x.useGreyImageFilter()),
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.38), BlendMode.darken),
                       fit: BoxFit.cover,
                       image: NetworkImage(states.bingWallPaper['image_url']))),
             ),
