@@ -26,6 +26,47 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   bool agree = false;
   TextEditingController controller = TextEditingController();
 
+  onLoginPress() async {
+    if (x.isMobile(controller.text)) {
+      if (agree) {
+        Get.toNamed(RoutesClass.SMS, arguments: {'mobile': controller.text});
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('服务协议及隐私保护'),
+                content: Text('为了更好的保障您的合法权益，请您阅读并同意以下协议《用户注册协议》和《隐私政策》'),
+                actions: [
+                  CupertinoDialogAction(
+                    child: Text(
+                      '不同意',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  CupertinoDialogAction(
+                    child: Text(
+                      '同意',
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                    onPressed: () {
+                      agree = true;
+                      setState(() {});
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      }
+    } else {
+      x.useToast('目前仅支持中国大陆用户使用 ~');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,16 +155,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (x.isMobile(controller.text)) {
-                        if (agree) {
-                          Get.toNamed(RoutesClass.SMS,
-                              arguments: {'mobile': controller.text});
-                        } else {}
-                      } else {
-                        x.useToast('目前仅支持中国大陆用户使用 ~');
-                      }
-                    },
+                    onPressed: () => onLoginPress(),
                     child: Text('获取验证码'),
                     // style: ButtonStyle(
                     //   backgroundColor: MaterialStateProperty.all<Color>(
@@ -150,7 +182,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                 });
                               }),
                           Text(
-                            "阅读并同意《注册协议》和隐私政策",
+                            "阅读并同意《用户注册协议》和《隐私政策》",
                             style:
                                 TextStyle(fontSize: 12, color: Colors.black38),
                           )
