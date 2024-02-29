@@ -1,11 +1,14 @@
 import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -21,12 +24,14 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   StatesProvider statesProvider = StatesProvider();
   List<PermissionCheck> datas = [];
   bool agree = false;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: MyAppBar(title: '欢迎使用'),
+      resizeToAvoidBottomInset: false,
       body: Consumer<StatesProvider>(
         builder: (context, value, child) {
           return Container(
@@ -55,7 +60,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black87,
-                            fontStyle: FontStyle.italic,
+                            // fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -83,6 +88,8 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                 height: 24,
               ),
               TextField(
+                controller: controller,
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                     hintText: '请输入手机号码',
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -107,7 +114,16 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (x.isMobile(controller.text)) {
+                        if (agree) {
+                          Get.toNamed(RoutesClass.SMS,
+                              arguments: {'mobile': controller.text});
+                        } else {}
+                      } else {
+                        x.useToast('目前仅支持中国大陆用户使用 ~');
+                      }
+                    },
                     child: Text('获取验证码'),
                     // style: ButtonStyle(
                     //   backgroundColor: MaterialStateProperty.all<Color>(

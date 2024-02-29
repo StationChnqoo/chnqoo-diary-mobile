@@ -1,6 +1,7 @@
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 
 class Services {
@@ -22,14 +23,19 @@ class Services {
         error: true,
         showProcessingTime: true,
         showCUrl: true,
-        // canShowLog: kDebugMode,
+        canShowLog: kDebugMode,
       ),
     );
   }
 
   selectBingWallPaper() async {
-    var result = await new Dio().get(
+    var result = await Dio().get(
         'https://mouday.github.io/wallpaper-database/${x.usePreviousDay(1)}.json');
+    return result;
+  }
+
+  selectTest() async {
+    var result = await dio.get('/test');
     return result;
   }
 }

@@ -74,6 +74,7 @@ class HomePageState extends State<HomePage> {
                       ),
                       onTap: () {
                         // scaffoldKey.currentState?.openDrawer();
+                        Services().selectTest();
                         Get.toNamed(RoutesClass.LOGIN);
                       },
                     ),
@@ -82,8 +83,8 @@ class HomePageState extends State<HomePage> {
               ))),
       body: Consumer<StatesProvider>(
         builder: (context, value, child) {
-          return Container(
-            child: ListView(
+          return SingleChildScrollView(
+            child: Column(
               children: [
                 SizedBox(
                   height: 6,
