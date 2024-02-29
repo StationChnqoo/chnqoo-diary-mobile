@@ -34,7 +34,7 @@ class StatesProvider extends ChangeNotifier {
 
   void readCaches() async {
     // Obtain shared preferences.
-    Stopwatch stopwatch = Stopwatch()..start();
+    int start = DateTime.now().millisecondsSinceEpoch;
     var myBox = await Hive.openBox(Config.HIVE_BOX);
     var version = myBox.get('version');
     if (version == null || version != Config.HIVE_VERSION) {
@@ -50,9 +50,10 @@ class StatesProvider extends ChangeNotifier {
     bingWallPaper = myBox.get('bingWallPaper');
     setting = myBox.get('setting');
     account = myBox.get('account');
+    int end = DateTime.now().millisecondsSinceEpoch;
     x.usePrint(
       'StatesProvider: ',
-      "Caches database initialized in ${stopwatch.elapsedMilliseconds}ms.",
+      "Caches database initialized in ${end - start}ms.",
     );
     isReadedCaches = true;
     notifyListeners();
@@ -61,17 +62,22 @@ class StatesProvider extends ChangeNotifier {
   clearCaches() {}
 
   void writeCache(key, value) async {
-    Stopwatch stopwatch = Stopwatch()..start();
+    int start = DateTime.now().millisecondsSinceEpoch;
     var box = await Hive.openBox(Config.HIVE_BOX);
     await box.put(key, value);
     notifyListeners();
-    stopwatch.stop();
-    x.usePrint('StatesProvider: ',
-        "Caches database updated in ${stopwatch.elapsedMilliseconds}ms.");
+    int end = DateTime.now().millisecondsSinceEpoch;
+    x.usePrint(
+        'StatesProvider: ', "Caches database updated in ${end - start}ms.");
   }
 
   void setBingWallPaper(dynamic value) {
     bingWallPaper = value;
     writeCache('bingWallPaper', value);
+  }
+
+  void setAccount(dynamic value) {
+    account = value;
+    writeCache('account', value);
   }
 }

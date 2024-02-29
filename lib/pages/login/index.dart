@@ -1,4 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
+import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
@@ -29,7 +30,13 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   onLoginPress() async {
     if (x.isMobile(controller.text)) {
       if (agree) {
-        Get.toNamed(RoutesClass.SMS, arguments: {'mobile': controller.text});
+        var result = await Services().sendSms(controller.text);
+        print('Service sendSms: ');
+        print(result);
+        if (result['success']) {
+          x.useToast("发送成功 ~");
+          Get.toNamed(RoutesClass.SMS, arguments: {'mobile': controller.text});
+        } else {}
       } else {
         showDialog(
             context: context,

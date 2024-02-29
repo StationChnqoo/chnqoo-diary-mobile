@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
+import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class SmsPage extends StatefulWidget {
@@ -25,13 +23,19 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
   int seconds = 60;
   late Timer timer;
 
-  onSendSMSPress() {
+  onSendPress() async {
     if (seconds == 0) {
       setState(() {
         seconds = 60;
       });
     }
     if (seconds == 60) {
+      var result = await Services().sendSms(routeParams['mobile']);
+      print('Service sendSms: ');
+      print(result);
+      if (result['success']) {
+        x.useToast("发送成功 ~");
+      } else {}
       timer = Timer.periodic(Duration(seconds: 1), (timer) {
         if (seconds == 0) {
           timer.cancel();
@@ -43,11 +47,17 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
     }
   }
 
-  onSmsCodeChange(String value) {
+  onSmsCodeChange(String value) async {
     print("onSmsCodeChange: ${value}");
-    if (value == '1234') {
-      Get.back();
-      Get.back();
+    if (RegExp(r'^\d{6}$').hasMatch(smsEditor.text) ||
+        RegExp(r'^\d{4}$').hasMatch(smsEditor.text)) {
+      var result =
+          await Services().checkSms(routeParams['mobile'], smsEditor.text);
+      if (result['success']) {
+        statesProvider.setAccount(result['data']);
+        Get.back();
+        Get.back();
+      }
     }
   }
 
@@ -117,7 +127,7 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
                                   fontSize: 14),
                             ),
                           ),
-                          onTap: () => onSendSMSPress()),
+                          onTap: () => onSendPress()),
                       GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           child: Container(
@@ -145,7 +155,7 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
     print("Sms page route params: ");
     print(routeParams);
     statesProvider = Provider.of<StatesProvider>(context, listen: false);
-    onSendSMSPress();
+    onSendPress();
   }
 
   @override
