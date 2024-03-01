@@ -1,11 +1,5 @@
-import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
-import 'package:chnqoo_diary_mobile/constants/x.dart';
-import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 
 class HomeSeachBar extends StatelessWidget {
   @override

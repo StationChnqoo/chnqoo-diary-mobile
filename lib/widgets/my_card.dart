@@ -8,11 +8,18 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card.filled(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-          child: child,
+    // return Card.filled(
+    //     child: Container(
+    //       padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+    //       child: child,
+    //     ),
+    //     elevation: 4);
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
         ),
-        elevation: 1);
+        child: child);
   }
 }

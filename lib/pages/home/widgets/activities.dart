@@ -23,7 +23,8 @@ class HomeActivities extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Colors.white),
+                        // color: Colors.white
+                      ),
                     child: MyCard(
                         child: Row(
                       children: [

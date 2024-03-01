@@ -1,5 +1,6 @@
 import 'package:chnqoo_diary_mobile/constants/todo_item.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_outline_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
@@ -38,7 +39,7 @@ class EditTodoPageState extends State<EditTodoPage> {
                     TextField(
                       maxLines: 4,
                       decoration: InputDecoration(
-                        hintText: '请输入待办事项内容 ...',
+                        hintText: '待办事项 ...',
                         border: InputBorder.none,
                       ),
                       style: TextStyle(fontSize: 16),
@@ -69,19 +70,23 @@ class EditTodoPageState extends State<EditTodoPage> {
                 children: [
                   Row(
                     children: [
-                      OutlinedButton.icon(
-                        onPressed: () {},
-                        label: Text('删除'),
-                        icon: Icon(Icons.delete),
-                      ),
+                      MyOutlineButton(
+                          text: '删除',
+                          icon: Icon(
+                            Icons.delete_outline_outlined,
+                            size: 20,
+                          ),
+                          onPress: () {}),
                       SizedBox(
                         width: 10,
                       ),
-                      OutlinedButton.icon(
-                        onPressed: () {},
-                        label: Text('保存'),
-                        icon: Icon(Icons.send),
-                      )
+                      MyOutlineButton(
+                          text: '保存',
+                          icon: Icon(
+                            Icons.upload_file,
+                            size: 20,
+                          ),
+                          onPress: () {}),
                     ],
                   )
                 ],

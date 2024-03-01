@@ -36,7 +36,10 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('服务协议及隐私保护'),
+                title: Text(
+                  '服务协议及隐私保护',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
                 content: Text('为了更好的保障您的合法权益，请您阅读并同意以下协议《用户注册协议》和《隐私政策》'),
                 actions: [
                   CupertinoDialogAction(

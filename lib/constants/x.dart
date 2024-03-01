@@ -71,7 +71,7 @@ class x {
   }
 
   static isNull(dynamic s) {
-    return s == null || s.isEmpty || s.trim().isEmpty;
+    return s == Null || s == null || s.isEmpty || s.trim().isEmpty;
   }
 
   static useDeepClone(dynamic object) {
@@ -151,5 +151,16 @@ class x {
   static useCurrentTime() {
     DateTime now = DateTime.now();
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+  }
+
+  static useDiffDate(int diff) {
+    DateTime now = DateTime.now();
+    DateTime time = now.add(Duration(days: diff));
+    return DateFormat('yyyy-MM-dd').format(time);
+  }
+
+  static useDate() {
+    DateTime now = DateTime.now();
+    return DateFormat('yyyy-MM-dd').format(now);
   }
 }
