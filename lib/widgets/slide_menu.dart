@@ -2,6 +2,7 @@ import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,14 +41,10 @@ class SlideMenuState extends State<SlideMenu> {
               accountEmail: Text('笔记号码: ' +
                   (statesProvider.account?['idQoo']?.toString() ??
                       '登录后才能拥有 ~')),
-              currentAccountPicture: ClipRRect(
-                  borderRadius: BorderRadius.circular(36.w),
-                  child: Image.network(
-                    x.useAorB(statesProvider.account?['avatar'],
-                        '${Config.CDN}/i.png'),
-                    width: 72.w,
-                    height: 72.w,
-                  )),
+              currentAccountPicture: MyAvatar(
+                  url: statesProvider.account?['avatar'],
+                  size: 72.w,
+                  onPress: () {}),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       // colorFilter: ColorFilter.matrix(x.useGreyImageFilter()),
@@ -83,6 +80,7 @@ class SlideMenuState extends State<SlideMenu> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    statesProvider = Provider.of<StatesProvider>(context, listen: false);
   }
 
   @override
