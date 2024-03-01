@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
@@ -12,6 +13,7 @@ import 'package:chnqoo_diary_mobile/pages/home/widgets/search_bar.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_avatar.dart';
 import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -38,6 +40,11 @@ class HomePageState extends State<HomePage> {
     } else {
       scaffoldKey.currentState?.openDrawer();
     }
+  }
+
+  onFloatMenuPress(CommonMenu menu) {
+    print("onFloatMenuPress: " + menu.page);
+    Get.toNamed(menu.page);
   }
 
   @override
@@ -69,21 +76,12 @@ class HomePageState extends State<HomePage> {
                     SizedBox(
                       width: 12,
                     ),
-                    GestureDetector(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(22.w),
-                        child: Image.network(
-                          x.useAorB(statesProvider.account?['avatar'],
-                              '${Config.CDN}/i.png'),
-                          height: 44.w,
-                          width: 44.w,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      onTap: () {
-                        onMinePress();
-                      },
-                    ),
+                    MyAvatar(
+                        url: statesProvider.account?['avatar'],
+                        size: 44.w,
+                        onPress: () {
+                          onMinePress();
+                        })
                   ],
                 ),
               ))),
@@ -154,46 +152,25 @@ class HomePageState extends State<HomePage> {
       drawer: SlideMenu(),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
-        animationDuration: Duration(milliseconds: 618),
+        animationDuration: Duration(milliseconds: 361),
         childrenButtonSize: Size.fromRadius(24),
         childPadding: EdgeInsets.all(5),
         childMargin: EdgeInsets.symmetric(vertical: 10),
         // childPadding: EdgeInsets.all(0),
         children: [
-          SpeedDialChild(
-            label: '日记',
-            child: Icon(
-              Icons.auto_stories_outlined,
-              color: Colors.black54,
-            ),
-          ),
-          SpeedDialChild(
-              label: '笔记',
-              child: Icon(
-                Icons.style_outlined,
-                color: Colors.black54,
-              )),
-          SpeedDialChild(
-            label: '心情',
-            child: Icon(
-              Icons.emoji_symbols_outlined,
-              color: Colors.black54,
-            ),
-          ),
-          SpeedDialChild(
-            label: '纪念日',
-            child: Icon(
-              Icons.event_note_outlined,
-              color: Colors.black54,
-            ),
-          ),
-          SpeedDialChild(
-            label: '代办事项',
-            child: Icon(
-              Icons.checklist_outlined,
-              color: Colors.black54,
-            ),
-          ),
+          ...CommonMenu.loadFloatingMenus()
+              .map(
+                (e) => SpeedDialChild(
+                    label: e.name,
+                    child: Icon(
+                      e.icon,
+                      color: Colors.black54,
+                    ),
+                    onTap: () {
+                      onFloatMenuPress(e);
+                    }),
+              )
+              .toList()
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

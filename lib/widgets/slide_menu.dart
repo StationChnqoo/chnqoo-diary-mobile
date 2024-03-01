@@ -1,5 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/config.dart';
-import 'package:chnqoo_diary_mobile/constants/drawer_menu.dart';
+import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class SlideMenu extends StatefulWidget {
 class SlideMenuState extends State<SlideMenu> {
   StatesProvider statesProvider = StatesProvider();
 
-  onMenuPress(DrawerMenu menu) {
+  onMenuPress(CommonMenu menu) {
     Get.toNamed(menu.id);
   }
 
@@ -59,7 +59,7 @@ class SlideMenuState extends State<SlideMenu> {
             Expanded(
                 child: ListView(padding: EdgeInsets.zero, children: [
               Column(
-                children: DrawerMenu.loadDrawerMenus()
+                children: CommonMenu.loadDrawerMenus()
                     .map((e) => Material(
                           child: ListTile(
                             splashColor: Color.fromRGBO(0, 0, 0, 0.08),

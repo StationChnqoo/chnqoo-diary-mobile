@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
-import 'package:crypto/crypto.dart';
 
 class x {
   static useCDN(String url, int width) {
@@ -145,6 +144,6 @@ class x {
   }
 
   static useAorB(dynamic a, dynamic b) {
-    return a == null || a == "" ? b : a;
+    return a == Null || a == null || a == "" ? b : a;
   }
 }

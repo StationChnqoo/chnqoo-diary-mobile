@@ -30,13 +30,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   onLoginPress() async {
     if (x.isMobile(controller.text)) {
       if (agree) {
-        var result = await Services().sendSms(controller.text);
-        print('Service sendSms: ');
-        print(result);
-        if (result['success']) {
-          x.useToast("发送成功 ~");
-          Get.toNamed(RoutesClass.SMS, arguments: {'mobile': controller.text});
-        } else {}
+        Get.toNamed(RoutesClass.SMS, arguments: {'mobile': controller.text});
       } else {
         showDialog(
             context: context,

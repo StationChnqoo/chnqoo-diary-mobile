@@ -38,6 +38,7 @@ flutter:
     - .env.development
     - .env.production
     - .env.staging
+    - assets/
   # fonts:
   #   - family: HarmonyOS-Sans
   #     fonts:
