@@ -2,6 +2,7 @@ import 'package:chnqoo_diary_mobile/pages/edit/anniversary/index.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/diary/index.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/motion/index.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/note/index.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/todo/index.dart';
 import 'package:chnqoo_diary_mobile/pages/home/index.dart';
 import 'package:chnqoo_diary_mobile/pages/login/index.dart';
 import 'package:chnqoo_diary_mobile/pages/permission/index.dart';
@@ -53,7 +54,7 @@ class RoutesClass {
     ),
     GetPage(
       name: EDIT_TODO,
-      page: () => const EditNotePage(),
+      page: () => const EditTodoPage(),
     )
   ];
 }

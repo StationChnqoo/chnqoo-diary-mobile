@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chnqoo_diary_mobile/constants/note_count.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,9 @@ class HomeNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Column(
+      child: MyCard(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -61,9 +62,7 @@ class HomeNotes extends StatelessWidget {
                 .toList(),
           )
         ],
-      ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: Colors.white),
+      )),
     );
   }
 }

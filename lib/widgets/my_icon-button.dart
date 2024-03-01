@@ -18,20 +18,18 @@ class MyIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-          onTap: onPress,
-          child: Container(
-            height: height,
-            decoration: BoxDecoration(color: Colors.white),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: reverse!
-                  ? [if (text != null) text!, icon]
-                  : [icon, if (text != null) text!],
-            ),
-          )),
-    );
+    return GestureDetector(
+        onTap: onPress,
+        child: Container(
+          height: height,
+          // decoration: BoxDecoration(color: Colors.white),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: reverse!
+                ? [if (text != null) text!, icon]
+                : [icon, if (text != null) text!],
+          ),
+        ));
   }
 }

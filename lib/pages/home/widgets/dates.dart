@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
@@ -9,43 +10,38 @@ class HomeDates extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: Colors.white),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: MyCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '纪念日',
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500),
+              Row(
+                children: [
+                  Text(
+                    '纪念日',
+                    style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  MyIconButton(
+                    height: 32.w,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Colors.black54,
+                    ),
+                    onPress: () {},
+                    reverse: true,
+                  )
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
-              MyIconButton(
-                height: 32.w,
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.black54,
-                ),
-                onPress: () {},
-                reverse: true,
-              )
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
-          Column(
-            children: ['吃饭', '睡觉', '打豆豆']
-                .map(
-                  (e) => Material(
-                      color: Colors.white,
-                      child: InkWell(
+              Column(
+                children: ['吃饭', '睡觉', '打豆豆']
+                    .map(
+                      (e) => GestureDetector(
                           onTap: () {},
-                          splashColor: Colors.black87.withOpacity(0.08),
                           child: Row(
                             children: [
                               Expanded(
@@ -80,12 +76,12 @@ class HomeDates extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          ))),
-                )
-                .toList(),
-          )
-        ],
-      ),
-    );
+                          )),
+                    )
+                    .toList(),
+              )
+            ],
+          ),
+        ));
   }
 }

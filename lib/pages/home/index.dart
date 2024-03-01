@@ -14,6 +14,7 @@ import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_avatar.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -95,37 +96,40 @@ class HomePageState extends State<HomePage> {
                 ),
                 HomeNotice(),
                 Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white),
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      height: (MediaQuery.of(context).size.width - 32) * 0.25,
-                      viewportFraction: 0.66,
-                      enlargeCenterPage: true,
-                    ),
-                    items: [1, 2, 3, 4, 5].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                '${dotenv.get('CDN')}/home-banner-${i}.jpg',
-                                width: MediaQuery.of(context).size.width - 24,
-                                height: double.maxFinite,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white),
+                    child: MyCard(
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          height:
+                              (MediaQuery.of(context).size.width - 32) * 0.25,
+                          viewportFraction: 0.66,
+                          enlargeCenterPage: true,
+                        ),
+                        items: [1, 2, 3, 4, 5].map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    '${dotenv.get('CDN')}/home-banner-${i}.jpg',
+                                    width:
+                                        MediaQuery.of(context).size.width - 24,
+                                    height: double.maxFinite,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              );
+                            },
                           );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ),
+                        }).toList(),
+                      ),
+                    )),
                 HomeNotes(),
                 HomeTodos(),
                 HomeDates(),

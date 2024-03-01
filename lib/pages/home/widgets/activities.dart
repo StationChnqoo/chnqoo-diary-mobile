@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,12 @@ class HomeActivities extends StatelessWidget {
               '平台近期违规用户处罚公示 ~',
             ]
                 .map((e) => Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white),
-                    child: Row(
+                    child: MyCard(
+                        child: Row(
                       children: [
                         Expanded(
                             child: Container(
@@ -63,7 +64,7 @@ class HomeActivities extends StatelessWidget {
                           ),
                         )
                       ],
-                    )))
+                    ))))
                 .toList(),
           )
         ],
