@@ -1,16 +1,14 @@
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:badges/badges.dart' as badges;
 
 class HomeTopics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

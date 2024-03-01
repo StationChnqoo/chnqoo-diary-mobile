@@ -11,7 +11,7 @@ class HomeTodos extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

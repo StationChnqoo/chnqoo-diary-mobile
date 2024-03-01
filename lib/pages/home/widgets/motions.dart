@@ -9,7 +9,7 @@ class HomeMotions extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

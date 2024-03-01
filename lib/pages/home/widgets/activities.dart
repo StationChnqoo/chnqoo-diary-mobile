@@ -20,7 +20,7 @@ class HomeActivities extends StatelessWidget {
               '平台近期违规用户处罚公示 ~',
             ]
                 .map((e) => Container(
-                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white),

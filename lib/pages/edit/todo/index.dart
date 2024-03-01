@@ -33,22 +33,59 @@ class EditTodoPageState extends State<EditTodoPage> {
               MyCard(
                   child: Container(
                 width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   children: [
-                    Text(
-                      '每日提醒',
-                      style: TextStyle(fontSize: 14),
+                    TextField(
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: '请输入待办事项内容 ...',
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(fontSize: 16),
                     ),
-                    MySwitcher(
-                        value: todo.isRepeat,
-                        onChanged: (value) {
-                          todo.isRepeat = !todo.isRepeat;
-                          setState(() {});
-                        })
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '每日提醒',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        MySwitcher(
+                            value: todo.isRepeat,
+                            onChanged: (value) {
+                              todo.isRepeat = !todo.isRepeat;
+                              setState(() {});
+                            })
+                      ],
+                    ),
                   ],
                 ),
-              ))
+              )),
+              SizedBox(
+                height: 12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () {},
+                        label: Text('删除'),
+                        icon: Icon(Icons.delete),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: () {},
+                        label: Text('保存'),
+                        icon: Icon(Icons.send),
+                      )
+                    ],
+                  )
+                ],
+              )
             ]),
           );
         },
