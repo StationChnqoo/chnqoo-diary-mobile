@@ -5,6 +5,7 @@ import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_snack_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -67,7 +68,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
             });
       }
     } else {
-      x.useToast('目前仅支持中国大陆用户使用 ~');
+      MySnackBar(context: context).error('目前仅支持中国大陆用户使用 ~');
     }
   }
 
@@ -136,7 +137,8 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                 controller: controller,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                    hintText: '请输入手机号码',
+                    // hintText: '',
+                    label: Text("请输入手机号码 ..."),
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),

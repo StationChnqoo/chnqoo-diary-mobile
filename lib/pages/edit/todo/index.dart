@@ -36,13 +36,21 @@ class EditTodoPageState extends State<EditTodoPage> {
                 width: double.infinity,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 6,
+                    ),
                     TextField(
+                      minLines: 1,
                       maxLines: 4,
+                      maxLength: 99,
+                      textAlignVertical: TextAlignVertical.top,
                       decoration: InputDecoration(
-                        hintText: '待办事项 ...',
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(fontSize: 16),
+                          // hintText: '简要备注 ...',
+                          label: Text('请输入待办事项 ...'),
+                          // contentPadding:
+                          //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12))),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

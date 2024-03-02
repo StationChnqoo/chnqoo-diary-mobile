@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
@@ -26,9 +27,24 @@ class EditNotePageState extends State<EditNotePage> {
             padding: EdgeInsets.all(12),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: 6,
-              ),
+              MyCard(
+                  child: Column(
+                children: [
+                  TextField(
+                    minLines: 1,
+                    maxLines: 4,
+                    maxLength: 32,
+                    textAlignVertical: TextAlignVertical.top,
+                    decoration: InputDecoration(
+                        // hintText: '简要备注 ...',
+                        label: Text('备注信息 ...'),
+                        // contentPadding:
+                        //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  )
+                ],
+              ))
             ]),
           );
         },

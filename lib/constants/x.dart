@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -58,18 +57,6 @@ class x {
     ];
   }
 
-  static useToast(String text) {
-    BotToast.showText(
-        text: text,
-        animationDuration: const Duration(milliseconds: 618),
-        contentColor: const Color.fromRGBO(0, 0, 0, 0.68),
-        textStyle: const TextStyle(
-          fontSize: 16,
-          color: Colors.white,
-        ),
-        borderRadius: BorderRadius.circular(16));
-  }
-
   static isNull(dynamic s) {
     return s == Null || s == null || s.isEmpty || s.trim().isEmpty;
   }
@@ -90,7 +77,6 @@ class x {
   }
 
   static usePrint(String title, dynamic message) {
-    String timestamp = DateTime.now().toString();
     String? fileName;
     int? lineNumber;
     // print(stackTrace.toString());
@@ -100,8 +86,12 @@ class x {
     //   lineNumber =
     //       int.parse(stackTrace.toString().split("\n")[1].split(":")[1]);
     // }
-    print('$timestamp: $title');
-    print('$timestamp: $message');
+    print("");
+    print('Console -> ${useCurrentTime()}');
+    print('${title}');
+    print('${message}');
+    print('Console -> ${useCurrentTime()}');
+    print("");
   }
 
   static useDocumentPath() async {

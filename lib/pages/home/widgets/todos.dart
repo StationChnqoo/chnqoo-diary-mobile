@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

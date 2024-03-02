@@ -1,9 +1,40 @@
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 
 // Dio在原有返回的结构上包了一层data -> {data: {success: bool, data: map}}
+
+class CurlBuilder extends Interceptor {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    // TODO: implement onRequest
+    super.onRequest(options, handler);
+    String curlCommand = 'curl --location \'${options.uri.toString()}\'';
+
+    options.headers.forEach((key, value) {
+      curlCommand += ' --header \'$key: $value\'';
+    });
+
+    if (options.data != null) {
+      curlCommand += " --data '${options.data}'";
+    }
+    x.usePrint('CurlBuilder', curlCommand);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    // TODO: implement onError
+    super.onError(err, handler);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    // TODO: implement onResponse
+    super.onResponse(response, handler);
+    x.usePrint('CurlBuilder', response.data);
+  }
+}
+
 class Services {
   Dio dio = Dio();
   // Services() : dio = Dio();
@@ -16,19 +47,7 @@ class Services {
         baseUrl: Config.SERVER,
         headers: Map.from(
             {'t': milliseconds, 's': x.useMD5(milliseconds.toString())}));
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        queryParameters: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
-        showProcessingTime: true,
-        showCUrl: true,
-        canShowLog: true,
-      ),
-    );
+    dio.interceptors.add(CurlBuilder());
   }
 
   selectBingWallPaper() async {

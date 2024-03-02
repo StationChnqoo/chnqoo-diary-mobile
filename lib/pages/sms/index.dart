@@ -4,6 +4,7 @@ import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -31,10 +32,8 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
     }
     if (seconds == 60) {
       var result = await Services().sendSms(routeParams['mobile']);
-      print('Service sendSms: ');
-      print(result);
       if (result['success']) {
-        x.useToast("发送成功 ~");
+        MySnackBar(context: context).success('发送成功 ~');
       } else {}
       timer = Timer.periodic(Duration(seconds: 1), (timer) {
         if (seconds == 0) {
@@ -100,7 +99,7 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
                       onSmsCodeChange(value);
                     },
                     decoration: InputDecoration(
-                        hintText: '请输入验证码',
+                        label: Text('请输入验证码 ...'),
                         contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),

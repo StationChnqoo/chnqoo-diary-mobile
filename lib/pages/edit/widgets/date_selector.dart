@@ -1,6 +1,6 @@
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_icon-button.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class DateSelectorState extends State<DateSelector> {
               Icon(
                 Icons.event,
                 color: Theme.of(context).primaryColor,
-                size: 20,
+                size: 18,
               ),
               SizedBox(
                 width: 4,
@@ -39,7 +39,9 @@ class DateSelectorState extends State<DateSelector> {
               Text(
                 '日期',
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontSize: 14),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               )
             ],
           ),
@@ -73,6 +75,7 @@ class DateSelectorState extends State<DateSelector> {
                     initialEntryMode: DatePickerEntryMode.calendarOnly,
                     firstDate: DateTime(1949, 10, 1),
                     lastDate: DateTime.now(),
+                    initialDate: DateTime.now(),
                     builder: (context, child) {
                       return Column(
                         children: <Widget>[
