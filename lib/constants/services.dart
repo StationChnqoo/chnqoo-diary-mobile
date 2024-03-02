@@ -1,6 +1,8 @@
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 
 // Dio在原有返回的结构上包了一层data -> {data: {success: bool, data: map}}
 
@@ -69,6 +71,24 @@ class Services {
   checkSms(String mobile, String code) async {
     var result = await dio.get("/sms",
         queryParameters: Map.from({"mobile": mobile, "code": code}));
+    return result.data;
+  }
+
+  upload(String id, int idQoo, String file) async {
+    dio.options.baseUrl = Config.COMMON_SERVER;
+    String fileName = file.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(
+        file,
+        filename: fileName,
+        contentType: MediaType.parse(lookupMimeType(file) ?? ""),
+      ),
+      "id": id,
+      "idQoo": idQoo
+    });
+
+    var result = await dio.post('/fileUploader', data: formData);
     return result.data;
   }
 }

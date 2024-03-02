@@ -1,9 +1,11 @@
 import 'package:chnqoo_diary_mobile/constants/anniversary_item.dart';
+import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/date_selector.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/images_selector.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_snack_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,25 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   StatesProvider statesProvider = StatesProvider();
   AnniversaryItem anniversary = AnniversaryItem.buildDefaultAnniversaryItem();
+
+  onUploaded(String file) async {
+    var result = await Services().upload(
+        statesProvider.account['id'], statesProvider.account['idQoo'], file);
+    if (result['success']) {
+      MySnackBar(context: context).success('上传成功 ~\n${result['data']}');
+      anniversary.images.add(result['data']);
+      setState(() {});
+    } else {}
+  }
+
+  onDaleted(String file) async {
+    bool result = anniversary.images.remove(file);
+    if (result) {
+      MySnackBar(context: context)
+          .success('删除成功 ~ \n${file.split('/').last}');
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +107,13 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
                     height: 10,
                   ),
                   ImagesSelector(
-                      images: [], onUploaded: () {}, onDeleted: () {})
+                      images: anniversary.images,
+                      onUpload: (file) {
+                        onUploaded(file);
+                      },
+                      onDeleted: (file) {
+                        onDaleted(file);
+                      })
                 ],
               ));
         },
