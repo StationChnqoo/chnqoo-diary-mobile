@@ -12,7 +12,6 @@ class Config {
   static String ENV = dotenv.get('ENV');
   static String CDN = dotenv.get('CDN');
   static String SERVER = dotenv.get('SERVER');
-  static String COMMON_SERVER = dotenv.get('COMMON_SERVER');
 
   /** 映射Config文件 */
   static String useConfigDotenvFile(String package) {

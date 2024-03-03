@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
+import 'package:chnqoo_diary_mobile/constants/stores.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_snack_bar.dart';
@@ -21,16 +22,17 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
   StatesProvider statesProvider = StatesProvider();
   TextEditingController smsEditor = TextEditingController();
   dynamic routeParams = Get.arguments;
-  int seconds = 60;
-  late Timer timer;
+  final SECONDS = 120;
+  int seconds = 120;
+  late Timer timer = Timer(Duration(milliseconds: 1), () {});
 
   onSendPress() async {
     if (seconds == 0) {
       setState(() {
-        seconds = 60;
+        seconds = SECONDS;
       });
     }
-    if (seconds == 60) {
+    if (seconds == SECONDS) {
       var result = await Services().sendSms(routeParams['mobile']);
       if (result['success']) {
         MySnackBar(context: context).success('发送成功 ~');
@@ -48,12 +50,13 @@ class SmsPageState extends State<SmsPage> with WidgetsBindingObserver {
 
   onSmsCodeChange(String value) async {
     print("onSmsCodeChange: ${value}");
-    if (RegExp(r'^\d{6}$').hasMatch(smsEditor.text) ||
-        RegExp(r'^\d{4}$').hasMatch(smsEditor.text)) {
+    if (RegExp(r'^\d{6}$').hasMatch(smsEditor.text)) {
       var result =
           await Services().checkSms(routeParams['mobile'], smsEditor.text);
       if (result['success']) {
         statesProvider.setAccount(result['data']);
+        dynamic u = result['data'];
+        await Stores().set(Stores.ID, u['id']);
         Get.back();
         Get.back();
       }

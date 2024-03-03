@@ -1,5 +1,6 @@
 import 'package:chnqoo_diary_mobile/constants/todo_item.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_filled_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_outline_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class EditTodoPageState extends State<EditTodoPage> {
                       SizedBox(
                         width: 10,
                       ),
-                      MyOutlineButton(
+                      MyFilledButton(
                           text: '保存',
                           icon: Icon(
                             Icons.upload_file,

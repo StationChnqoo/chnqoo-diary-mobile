@@ -1,13 +1,20 @@
+import 'dart:developer';
+
 import 'package:chnqoo_diary_mobile/constants/anniversary_item.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
+import 'package:chnqoo_diary_mobile/constants/stores.dart';
+import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/date_selector.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/images_selector.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/widgets/public_selector.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_filled_button.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_outline_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_snack_bar.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class EditAnniversaryPage extends StatefulWidget {
@@ -26,21 +33,37 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
     var result = await Services().upload(
         statesProvider.account['id'], statesProvider.account['idQoo'], file);
     if (result['success']) {
-      MySnackBar(context: context).success('上传成功 ~\n${result['data']}');
+      MySnackBar(context: context)
+          .success('上传成功 ~\n${(result['data'] as String).split('/').last}');
       anniversary.images.add(result['data']);
       setState(() {});
-    } else {}
+    } else {
+      MySnackBar(context: context).error(result['message']);
+    }
   }
 
   onDaleted(String file) async {
     bool result = anniversary.images.remove(file);
     if (result) {
-      MySnackBar(context: context)
-          .success('删除成功 ~ \n${file.split('/').last}');
+      MySnackBar(context: context).success('删除成功 ~ \n${file.split('/').last}');
     }
     setState(() {});
   }
 
+  onSubmitPress() async {
+    if (x.isNull(anniversary.title) || anniversary.title.length < 6) {
+      MySnackBar(context: context).error("描述事件不能少于6个汉字 ~");
+    } else {
+      var result = await Services().editAnniversary(anniversary);
+      if (result['success']) {
+        MySnackBar(context: context).success('保存成功');
+        Get.back();
+      } else {
+        MySnackBar(context: context).error(result['message']);
+      }
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,74 +73,141 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
       body: Consumer<StatesProvider>(
         builder: (context, value, child) {
           return Container(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                children: [
-                  MyCard(
-                      child: Container(
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 6,
-                        ),
-                        TextField(
-                          minLines: 1,
-                          textAlignVertical: TextAlignVertical.top,
-                          style: TextStyle(fontSize: 16),
-                          decoration: InputDecoration(
-                              // hintText: '简要备注 ...',
-                              label: Text('描述事件 ...'),
-                              // contentPadding:
-                              //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        TextField(
-                          minLines: 1,
-                          maxLines: 4,
-                          // maxLength: 99,
-                          textAlignVertical: TextAlignVertical.top,
-                          style: TextStyle(fontSize: 16),
-                          decoration: InputDecoration(
-                              // hintText: '简要备注 ...',
-                              label: Text('发表感想 ...'),
-                              // contentPadding:
-                              //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                        ),
-                      ],
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 12,
                     ),
-                  )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  DateSelector(
-                    date: anniversary.happenedDate,
-                    onDateChanged: (date) {
-                      anniversary.happenedDate = date;
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ImagesSelector(
-                      images: anniversary.images,
-                      onUpload: (file) {
-                        onUploaded(file);
+                    MyCard(
+                        child: Container(
+                      width: double.infinity,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 6,
+                          ),
+                          TextField(
+                            minLines: 1,
+                            textAlignVertical: TextAlignVertical.top,
+                            style: TextStyle(fontSize: 16),
+                            onChanged: (value) {
+                              anniversary.title = value;
+                              setState(() {});
+                            },
+                            decoration: InputDecoration(
+                                // hintText: '简要备注 ...',
+                                label: Text('描述事件 ...'),
+                                // contentPadding:
+                                //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12))),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          TextField(
+                            minLines: 1,
+                            maxLines: 4,
+                            // maxLength: 99,
+                            textAlignVertical: TextAlignVertical.top,
+                            style: TextStyle(fontSize: 16),
+                            onChanged: (value) {
+                              anniversary.message = value;
+                              setState(() {});
+                            },
+                            decoration: InputDecoration(
+                                // hintText: '简要备注 ...',
+                                label: Text('发表感想 ...'),
+                                // contentPadding:
+                                //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12))),
+                          ),
+                        ],
+                      ),
+                    )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DateSelector(
+                      date: anniversary.happenedDate,
+                      onDateChanged: (date) {
+                        anniversary.happenedDate = date;
+                        setState(() {});
                       },
-                      onDeleted: (file) {
-                        onDaleted(file);
-                      })
-                ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ImagesSelector(
+                        images: anniversary.images,
+                        onUpload: (file) {
+                          onUploaded(file);
+                        },
+                        onDeleted: (file) {
+                          onDaleted(file);
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    PublicSelector(
+                        isPublic: anniversary.isPublic,
+                        onPublicChanged: (value) {
+                          anniversary.isPublic = !anniversary.isPublic;
+                          setState(() {});
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MyOutlineButton(
+                              text: '删除',
+                              icon: Icon(
+                                Icons.delete_outline_outlined,
+                                size: 20,
+                              ),
+                              onPress: () {}),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          MyFilledButton(
+                              text: '保存',
+                              icon: Icon(
+                                Icons.upload_file,
+                                size: 20,
+                              ),
+                              onPress: onSubmitPress),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                  ],
+                ),
               ));
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initUserId();
+  }
+
+  void initUserId() async {
+    if (x.isNull(anniversary.userId)) {
+      anniversary.userId = await Stores().get(Stores.ID);
+      print('anniversary.userId: ${await Stores().get(Stores.ID)}');
+      setState(() {});
+    }
   }
 }

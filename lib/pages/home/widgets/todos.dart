@@ -25,16 +25,6 @@ class HomeTodos extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
-                  MyIconButton(
-                    height: 32.w,
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: Colors.black54,
-                    ),
-                    onPress: () {},
-                    reverse: true,
-                  )
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),

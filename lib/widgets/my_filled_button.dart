@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MyOutlineButton extends StatelessWidget {
+class MyFilledButton extends StatelessWidget {
   final String text;
   final Icon icon;
   final double? height;
   final onPress;
 
-  MyOutlineButton(
+  MyFilledButton(
       {this.height = 32,
       required this.text,
       required this.icon,
@@ -16,7 +16,7 @@ class MyOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      child: OutlinedButton.icon(
+      child: FilledButton.icon(
         onPressed: onPress,
         label: Text(text),
         icon: icon,

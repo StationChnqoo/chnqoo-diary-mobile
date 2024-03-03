@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:chnqoo_diary_mobile/constants/anniversary_item.dart';
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:dio/dio.dart';
@@ -49,6 +52,7 @@ class Services {
         baseUrl: Config.SERVER,
         headers: Map.from(
             {'t': milliseconds, 's': x.useMD5(milliseconds.toString())}));
+
     dio.interceptors.add(CurlBuilder());
   }
 
@@ -64,18 +68,24 @@ class Services {
   }
 
   sendSms(String mobile) async {
-    var result = await dio.post('/sms', data: Map.from({"mobile": mobile}));
+    var result = await dio.get('/sendSms.do',
+        queryParameters: Map.from({"mobile": mobile}));
     return result.data;
   }
 
   checkSms(String mobile, String code) async {
-    var result = await dio.get("/sms",
+    var result = await dio.get("/checkSms.do",
         queryParameters: Map.from({"mobile": mobile, "code": code}));
     return result.data;
   }
 
-  upload(String id, int idQoo, String file) async {
-    dio.options.baseUrl = Config.COMMON_SERVER;
+  editAnniversary(AnniversaryItem anniversaryItem) async {
+    var result = await dio.post("/editAnniversary.do",
+        data: jsonEncode(anniversaryItem));
+    return result.data;
+  }
+
+  upload(String id, String idQoo, String file) async {
     String fileName = file.split('/').last;
 
     FormData formData = FormData.fromMap({
@@ -87,8 +97,7 @@ class Services {
       "id": id,
       "idQoo": idQoo
     });
-
-    var result = await dio.post('/fileUploader', data: formData);
+    var result = await dio.post('/fileUploader.do', data: formData);
     return result.data;
   }
 }

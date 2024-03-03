@@ -1,10 +1,7 @@
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:badges/badges.dart' as badges;
 
 class HomeActivities extends StatelessWidget {
   @override
@@ -22,9 +19,9 @@ class HomeActivities extends StatelessWidget {
                 .map((e) => Container(
                     margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        // color: Colors.white
-                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      // color: Colors.white
+                    ),
                     child: MyCard(
                         child: Row(
                       children: [

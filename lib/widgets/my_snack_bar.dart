@@ -29,6 +29,7 @@ class MySnackBar {
       margin: EdgeInsets.all(16),
       behavior: SnackBarBehavior.floating,
       backgroundColor: color,
+      duration: Duration(seconds: 2),
     ));
   }
 }

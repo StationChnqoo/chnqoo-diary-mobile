@@ -44,7 +44,6 @@ class CommonMenu {
           name: '切换身份',
           icon: Icons.swipe_vertical_outlined,
           page: ''),
-      CommonMenu(id: 'exit', name: '退出登录', icon: Icons.settings_power, page: '')
     ];
   }
 

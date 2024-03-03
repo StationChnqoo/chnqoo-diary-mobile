@@ -27,10 +27,14 @@ class ImagesSelector extends StatefulWidget {
 class ImagesSelectorState extends State<ImagesSelector> {
   onMorePhotoPress(context) async {
     var picker = ImagePicker();
-    var pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      print("Picked image: ${pickedImage.path} --> ${pickedImage.name}");
-      widget.onUpload(pickedImage.path);
+    if (widget.images.length == 9) {
+      MySnackBar(context: context).error('最多只能上传9张照片 ~');
+    } else {
+      var pickedImage = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        print("Picked image: ${pickedImage.path} --> ${pickedImage.name}");
+        widget.onUpload(pickedImage.path);
+      }
     }
   }
 
@@ -78,43 +82,51 @@ class ImagesSelectorState extends State<ImagesSelector> {
             )
           ],
         ),
-        ...widget.images.map((e) => Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    child: Image.network(
-                      e,
-                      height: 36.w,
-                      width: 36.w,
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(4),
+        ...widget.images.asMap().entries.map((entry) {
+          final index = entry.key;
+          final e = entry.value;
+
+          return Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Row(
+              children: [
+                Text('${index + 1}/${widget.images.length} · ',
+                    style: TextStyle(
+                        fontSize: 16, color: Theme.of(context).primaryColor)),
+                ClipRRect(
+                  child: Image.network(
+                    e,
+                    height: 36.w,
+                    width: 36.w,
+                    fit: BoxFit.cover,
                   ),
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 6),
-                        child: Text(
-                          e.split('/').last,
-                          style: TextStyle(color: Colors.black54, fontSize: 12),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )),
-                  IconButton(
-                    onPressed: () {
-                      widget.onDeleted(e);
-                    },
-                    icon: Icon(
-                      Icons.delete_outline_outlined,
-                      color: Colors.redAccent,
-                    ),
-                    hoverColor: Colors.redAccent.withOpacity(0.8),
-                  )
-                ],
-              ),
-            ))
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 6),
+                      child: Text(
+                        e.split('/').last,
+                        style: TextStyle(color: Colors.black54, fontSize: 12),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )),
+                IconButton(
+                  onPressed: () {
+                    widget.onDeleted(e);
+                  },
+                  icon: Icon(
+                    Icons.delete_outline_outlined,
+                    color: Colors.redAccent,
+                  ),
+                  hoverColor: Colors.redAccent.withOpacity(0.8),
+                )
+              ],
+            ),
+          );
+        })
       ],
     )));
   }

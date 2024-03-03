@@ -1,10 +1,11 @@
-import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
+import 'package:chnqoo_diary_mobile/constants/stores.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_avatar.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_outline_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,11 @@ class SlideMenuState extends State<SlideMenu> {
 
   onMenuPress(CommonMenu menu) {
     Get.toNamed(menu.id);
+  }
+
+  onLoginOutPress() {
+    statesProvider.resetAccount();
+    Stores().set(Stores.ID, '');
   }
 
   @override
@@ -68,7 +74,20 @@ class SlideMenuState extends State<SlideMenu> {
                           ),
                         ))
                     .toList(),
-              )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: MyOutlineButton(
+                    onPress: onLoginOutPress,
+                    text: '退出登录',
+                    icon: Icon(Icons.power_off_outlined)),
+              ),
+              SizedBox(
+                height: 32,
+              ),
             ]))
           ],
         ),

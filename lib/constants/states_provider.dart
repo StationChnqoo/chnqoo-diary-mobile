@@ -80,4 +80,9 @@ class StatesProvider extends ChangeNotifier {
     account = value;
     writeCache('account', value);
   }
+
+  void resetAccount() {
+    account = DEFAULT_ACCOUNT;
+    writeCache('account', DEFAULT_ACCOUNT);
+  }
 }
