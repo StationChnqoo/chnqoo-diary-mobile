@@ -1,4 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/todo_item.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_filled_button.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_outline_button.dart';
@@ -43,7 +44,6 @@ class EditTodoPageState extends State<EditTodoPage> {
                     TextField(
                       minLines: 1,
                       maxLines: 4,
-                      maxLength: 99,
                       textAlignVertical: TextAlignVertical.top,
                       decoration: InputDecoration(
                           // hintText: '简要备注 ...',
@@ -53,53 +53,33 @@ class EditTodoPageState extends State<EditTodoPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12))),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '每日提醒',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        MySwitcher(
-                            value: todo.isRepeat,
-                            onChanged: (value) {
-                              todo.isRepeat = !todo.isRepeat;
-                              setState(() {});
-                            })
-                      ],
-                    ),
                   ],
                 ),
               )),
               SizedBox(
                 height: 12,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      MyOutlineButton(
-                          text: '删除',
-                          icon: Icon(
-                            Icons.delete_outline_outlined,
-                            size: 20,
-                          ),
-                          onPress: () {}),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      MyFilledButton(
-                          text: '保存',
-                          icon: Icon(
-                            Icons.upload_file,
-                            size: 20,
-                          ),
-                          onPress: () {}),
-                    ],
-                  )
-                ],
-              )
+              MyCard(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '每日提醒',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    MySwitcher(
+                        value: todo.isRepeat,
+                        onChanged: (value) {
+                          todo.isRepeat = !todo.isRepeat;
+                          setState(() {});
+                        })
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              EditBottons(onDeletePress: () {}, onSavePress: () {})
             ]),
           );
         },

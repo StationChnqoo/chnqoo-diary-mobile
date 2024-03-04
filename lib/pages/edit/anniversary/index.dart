@@ -5,6 +5,7 @@ import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/stores.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/date_selector.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/images_selector.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/public_selector.dart';
@@ -63,7 +64,7 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
       }
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +99,7 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
                             },
                             decoration: InputDecoration(
                                 // hintText: '简要备注 ...',
-                                label: Text('描述事件 ...'),
+                                label: Text('请描述事件 ...'),
                                 // contentPadding:
                                 //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
                                 border: OutlineInputBorder(
@@ -119,7 +120,7 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
                             },
                             decoration: InputDecoration(
                                 // hintText: '简要备注 ...',
-                                label: Text('发表感想 ...'),
+                                label: Text('请发表感想 ...'),
                                 // contentPadding:
                                 //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
                                 border: OutlineInputBorder(
@@ -161,30 +162,8 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          MyOutlineButton(
-                              text: '删除',
-                              icon: Icon(
-                                Icons.delete_outline_outlined,
-                                size: 20,
-                              ),
-                              onPress: () {}),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          MyFilledButton(
-                              text: '保存',
-                              icon: Icon(
-                                Icons.upload_file,
-                                size: 20,
-                              ),
-                              onPress: onSubmitPress),
-                        ],
-                      ),
-                    ),
+                    EditBottons(
+                        onDeletePress: () {}, onSavePress: onSubmitPress),
                     SizedBox(
                       height: 12,
                     ),

@@ -1,3 +1,7 @@
+import 'package:chnqoo_diary_mobile/constants/motion_item.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
+import 'package:chnqoo_diary_mobile/pages/edit/widgets/emoji_selector.dart';
+import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
@@ -13,6 +17,12 @@ class EditMotionPage extends StatefulWidget {
 class EditMotionPageState extends State<EditMotionPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   StatesProvider statesProvider = StatesProvider();
+  MotionItem motionItem = MotionItem.buildDefaultMotionItem();
+
+  void onEmojiPress(String s) {
+    motionItem.emoji = s;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +39,28 @@ class EditMotionPageState extends State<EditMotionPage> {
               SizedBox(
                 height: 6,
               ),
+              MyCard(
+                child: TextField(
+                  minLines: 1,
+                  maxLines: 4,
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: InputDecoration(
+                      // hintText: '简要备注 ...',
+                      label: Text('请展开详细说说 ...'),
+                      // contentPadding:
+                      //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              EmojiSelector(emoji: motionItem.emoji, onPress: onEmojiPress),
+              SizedBox(
+                height: 12,
+              ),
+              EditBottons(onDeletePress: () {}, onSavePress: () {}),
             ]),
           );
         },
