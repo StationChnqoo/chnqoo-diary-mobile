@@ -55,7 +55,12 @@ static String useConfigDotenvFile(String package) {
 ```
 
 ### Web
+
 网络图片跨域不显示，需要加参数`--web-browser-flag "--disable-web-security"`
+
+### Json .g.dart creator
+
+flutter pub run build_runner build
 
 ## Thanks
 

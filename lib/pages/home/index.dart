@@ -1,9 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
-import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
-import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/dates.dart';
@@ -22,7 +21,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,11 +32,11 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   ScrollController? swiper;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  StatesProvider statesProvider = StatesProvider();
+  GetStores stores = Get.find<GetStores>();
 
   onMinePress() {
     // Get.dialog(Text('呵呵'));
-    if (statesProvider.account?['id'] == null) {
+    if (x.isNull(stores.user.value.id)) {
       Get.toNamed(RoutesClass.LOGIN);
     } else {
       scaffoldKey.currentState?.openDrawer();
@@ -80,7 +78,7 @@ class HomePageState extends State<HomePage> {
                       width: 12,
                     ),
                     MyAvatar(
-                        url: statesProvider.account?['avatar'],
+                        url: stores.user.value.avatar,
                         size: 44.w,
                         onPress: () {
                           onMinePress();
@@ -88,73 +86,64 @@ class HomePageState extends State<HomePage> {
                   ],
                 ),
               ))),
-      body: Consumer<StatesProvider>(
-        builder: (context, value, child) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 6,
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          SizedBox(
+            height: 6,
+          ),
+          HomeNotice(),
+          Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), color: Colors.white),
+              child: MyCard(
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    height: (MediaQuery.of(context).size.width - 32) * 0.25,
+                    viewportFraction: 0.66,
+                    enlargeCenterPage: true,
+                  ),
+                  items: [1, 2, 3, 4, 5].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              '${dotenv.get('CDN')}/home-banner-${i}.jpg',
+                              width: MediaQuery.of(context).size.width - 24,
+                              height: double.maxFinite,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
-                HomeNotice(),
-                Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white),
-                    child: MyCard(
-                      child: CarouselSlider(
-                        options: CarouselOptions(
-                          autoPlay: true,
-                          height:
-                              (MediaQuery.of(context).size.width - 32) * 0.25,
-                          viewportFraction: 0.66,
-                          enlargeCenterPage: true,
-                        ),
-                        items: [1, 2, 3, 4, 5].map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.network(
-                                    '${dotenv.get('CDN')}/home-banner-${i}.jpg',
-                                    width:
-                                        MediaQuery.of(context).size.width - 24,
-                                    height: double.maxFinite,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                    )),
-                HomeNotes(),
-                HomeTodos(),
-                HomeDates(),
-                HomeMotions(),
-                HomeTopics(),
-                HomeActivities(),
-                Container(
-                    margin: EdgeInsets.all(12),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Center(
-                      child: Text(
-                        'Env: ${dotenv.get('ENV')}',
-                        style: TextStyle(color: Colors.black38, fontSize: 12),
-                      ),
-                    ))
-              ],
-            ),
-          );
-        },
-      ),
+              )),
+          HomeNotes(),
+          HomeTodos(),
+          HomeDates(),
+          HomeMotions(),
+          HomeTopics(),
+          HomeActivities(),
+          Container(
+              margin: EdgeInsets.all(12),
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              child: Center(
+                child: Text(
+                  'Env: ${dotenv.get('ENV')}',
+                  style: TextStyle(color: Colors.black38, fontSize: 12),
+                ),
+              ))
+        ],
+      )),
       drawer: SlideMenu(),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
@@ -184,11 +173,10 @@ class HomePageState extends State<HomePage> {
 
   loadBingPicture() async {
     var result = await Services().selectBingWallPaper();
-    statesProvider.setBingWallPaper(result.data);
+    stores.setBingWallPaper(BingWallPaper.fromJson(result.data));
   }
 
   initGetStores() {
-    GetStores stores = Get.put(GetStores());
     ever(stores.homePage, (value) {
       x.usePrint('initGetStores: ', 'stores.homePage: ${value}');
     });
@@ -198,7 +186,6 @@ class HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    statesProvider = Provider.of<StatesProvider>(context, listen: false);
     loadBingPicture();
     initGetStores();
   }

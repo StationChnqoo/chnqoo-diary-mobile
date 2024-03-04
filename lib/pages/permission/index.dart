@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
-import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_switcher.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionPage extends StatefulWidget {
@@ -20,68 +15,61 @@ class PermissionPage extends StatefulWidget {
 class PermissionPageState extends State<PermissionPage>
     with WidgetsBindingObserver {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  StatesProvider statesProvider = StatesProvider();
+  
   List<PermissionCheck> datas = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      appBar: MyAppBar(title: '权限设置'),
-      body: Consumer<StatesProvider>(
-        builder: (context, value, child) {
-          return Container(
-            child: ListView(children: [
-              SizedBox(
-                height: 6,
-              ),
-              ...datas
-                  .map((e) => Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.white),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  e.title,
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.black87),
-                                ),
-                                MySwitcher(
-                                    value: e.isOpened,
-                                    onChanged: (value) {
-                                      openAppSettings();
-                                    })
-                              ],
-                            ),
-                            Text(
-                              e.message,
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.black54),
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            ]),
-          );
-        },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        key: scaffoldKey,
+        appBar: MyAppBar(title: '权限设置'),
+        body: Container(
+          child: ListView(children: [
+            SizedBox(
+              height: 6,
+            ),
+            ...datas
+                .map((e) => Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                e.title,
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black87),
+                              ),
+                              MySwitcher(
+                                  value: e.isOpened,
+                                  onChanged: (value) {
+                                    openAppSettings();
+                                  })
+                            ],
+                          ),
+                          Text(
+                            e.message,
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.black54),
+                          )
+                        ],
+                      ),
+                    ))
+                .toList(),
+          ]),
+        ));
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    statesProvider = Provider.of<StatesProvider>(context, listen: false);
     checkPermissions();
     WidgetsBinding.instance.addObserver(this);
   }

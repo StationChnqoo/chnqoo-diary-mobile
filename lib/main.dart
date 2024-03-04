@@ -1,14 +1,12 @@
 import 'package:chnqoo_diary_mobile/constants/config.dart';
-import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
-import 'package:chnqoo_diary_mobile/constants/x.dart';
+import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   await ScreenUtil.ensureScreenSize();
@@ -17,12 +15,8 @@ void main() async {
   // init Hive
   // final document = await getApplicationDocumentsDirectory();
   // Logger().d('App document dir: ${document.path}');
-  Hive.init(await x.useDocumentPath());
-  outPrintln();
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<StatesProvider>(
-        create: (context) => StatesProvider()),
-  ], child: const ChnqooDiaryMobile()));
+  await GetStorage.init();
+  runApp(const ChnqooDiaryMobile());
 }
 
 outPrintln() {
@@ -88,9 +82,8 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.put(GetStores());
     // Get.updateLocale(Locale('zh', 'CN'));
-    print('Get.deviceLocale: ');
-    print(Get.deviceLocale);
   }
 
   @override
