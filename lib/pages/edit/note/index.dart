@@ -30,36 +30,41 @@ class EditNotePageState extends State<EditNotePage> {
       body: Consumer<StatesProvider>(
         builder: (context, value, child) {
           return Container(
-            padding: EdgeInsets.all(12),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              MyCard(
-                  child: Column(
-                children: [
-                  TextField(
-                    minLines: 1,
-                    maxLines: 4,
-                    textAlignVertical: TextAlignVertical.top,
-                    decoration: InputDecoration(
-                        // hintText: '简要备注 ...',
-                        label: Text('请简单备注 ...'),
-                        // contentPadding:
-                        //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12))),
-                  ),
-                ],
-              )),
-              SizedBox(
-                height: 12,
-              ),
-              ImagesSelector(
-                  images: noteItem.images, onUpload: () {}, onDeleted: () {}),
-              SizedBox(
-                height: 12,
-              ),
-              EditBottons(onDeletePress: () {}, onSavePress: () {})
-            ]),
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MyCard(
+                        child: Column(
+                      children: [
+                        TextField(
+                          minLines: 1,
+                          maxLines: 4,
+                          textAlignVertical: TextAlignVertical.top,
+                          decoration: InputDecoration(
+                              // hintText: '简要备注 ...',
+                              label: Text('请简单备注 ...'),
+                              // contentPadding:
+                              //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12))),
+                        ),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    ImagesSelector(
+                        images: noteItem.images,
+                        onUpload: () {},
+                        onDeleted: () {}),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    EditBottons(onDeletePress: () {}, onSavePress: () {})
+                  ]),
+            ),
           );
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.

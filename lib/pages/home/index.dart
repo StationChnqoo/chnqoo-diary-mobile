@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/config.dart';
+import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/states_provider.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
@@ -36,6 +37,7 @@ class HomePageState extends State<HomePage> {
   StatesProvider statesProvider = StatesProvider();
 
   onMinePress() {
+    // Get.dialog(Text('呵呵'));
     if (statesProvider.account?['id'] == null) {
       Get.toNamed(RoutesClass.LOGIN);
     } else {
@@ -181,8 +183,15 @@ class HomePageState extends State<HomePage> {
   }
 
   loadBingPicture() async {
-    var result = await new Services().selectBingWallPaper();
+    var result = await Services().selectBingWallPaper();
     statesProvider.setBingWallPaper(result.data);
+  }
+
+  initGetStores() {
+    GetStores stores = Get.put(GetStores());
+    ever(stores.homePage, (value) {
+      x.usePrint('initGetStores: ', 'stores.homePage: ${value}');
+    });
   }
 
   @override
@@ -191,5 +200,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
     statesProvider = Provider.of<StatesProvider>(context, listen: false);
     loadBingPicture();
+    initGetStores();
   }
 }

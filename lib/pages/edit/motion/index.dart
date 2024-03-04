@@ -33,35 +33,39 @@ class EditMotionPageState extends State<EditMotionPage> {
       body: Consumer<StatesProvider>(
         builder: (context, value, child) {
           return Container(
-            padding: EdgeInsets.all(12),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: 6,
-              ),
-              MyCard(
-                child: TextField(
-                  minLines: 1,
-                  maxLines: 4,
-                  textAlignVertical: TextAlignVertical.top,
-                  decoration: InputDecoration(
-                      // hintText: '简要备注 ...',
-                      label: Text('请展开详细说说 ...'),
-                      // contentPadding:
-                      //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12))),
-                ),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              EmojiSelector(emoji: motionItem.emoji, onPress: onEmojiPress),
-              SizedBox(
-                height: 12,
-              ),
-              EditBottons(onDeletePress: () {}, onSavePress: () {}),
-            ]),
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 6,
+                    ),
+                    MyCard(
+                      child: TextField(
+                        minLines: 1,
+                        maxLines: 4,
+                        textAlignVertical: TextAlignVertical.top,
+                        decoration: InputDecoration(
+                            // hintText: '简要备注 ...',
+                            label: Text('请展开详细说说 ...'),
+                            // contentPadding:
+                            //     EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    EmojiSelector(
+                        emoji: motionItem.emoji, onPress: onEmojiPress),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    EditBottons(onDeletePress: () {}, onSavePress: () {}),
+                  ]),
+            ),
           );
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.
