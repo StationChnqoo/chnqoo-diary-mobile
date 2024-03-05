@@ -1,4 +1,4 @@
-import 'package:chnqoo_diary_mobile/constants/note_item.dart';
+import 'package:chnqoo_diary_mobile/constants/note.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/images_selector.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
@@ -14,7 +14,7 @@ class EditNotePage extends StatefulWidget {
 
 class EditNotePageState extends State<EditNotePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  NoteItem noteItem = NoteItem.buildDefaultNoteItem();
+  Note noteItem = Note.buildDefaultNoteItem();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,9 @@ class EditNotePageState extends State<EditNotePage> {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              SizedBox(
+                height: 12,
+              ),
               MyCard(
                   child: Column(
                 children: [
@@ -52,7 +55,10 @@ class EditNotePageState extends State<EditNotePage> {
               SizedBox(
                 height: 12,
               ),
-              EditBottons(onDeletePress: () {}, onSavePress: () {})
+              EditBottons(onDeletePress: () {}, onSavePress: () {}),
+              SizedBox(
+                height: 12,
+              ),
             ]),
           ),
         ));

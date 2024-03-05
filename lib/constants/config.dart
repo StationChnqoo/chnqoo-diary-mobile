@@ -1,8 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Config {
-  static String HIVE_VERSION = "0.0.3";
-  static String HIVE_BOX = "myBox";
   /** Command variables */
   static const String APP_PACKAGE_NAME =
       String.fromEnvironment('APP_PACKAGE_NAME');

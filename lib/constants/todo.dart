@@ -1,6 +1,6 @@
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 
-class TodoItem {
+class Todo {
   String id;
   String content;
   bool isRepeat;
@@ -8,7 +8,7 @@ class TodoItem {
   String createTime;
   String updateTime;
 
-  TodoItem(
+  Todo(
       {required this.id,
       required this.content,
       required this.isRepeat,
@@ -16,7 +16,7 @@ class TodoItem {
       required this.createTime,
       required this.updateTime});
 
-  static buildDefaultTodoItem() => TodoItem(
+  static buildDefaultTodoItem() => Todo(
       id: '',
       content: '',
       isRepeat: true,

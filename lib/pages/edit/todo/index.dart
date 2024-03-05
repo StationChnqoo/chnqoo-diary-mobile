@@ -1,5 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
-import 'package:chnqoo_diary_mobile/constants/todo_item.dart';
+import 'package:chnqoo_diary_mobile/constants/todo.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
@@ -16,7 +16,7 @@ class EditTodoPage extends StatefulWidget {
 
 class EditTodoPageState extends State<EditTodoPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  TodoItem todo = TodoItem.buildDefaultTodoItem();
+  Todo todo = Todo.buildDefaultTodoItem();
   GetStores stores = Get.find<GetStores>();
 
   @override
@@ -86,6 +86,6 @@ class EditTodoPageState extends State<EditTodoPage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    stores.refreshHomePage();
+    stores.homePage.value++;
   }
 }

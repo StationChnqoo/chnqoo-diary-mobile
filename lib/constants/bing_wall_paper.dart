@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'bing_wall_paper.g.dart';
+
+@JsonSerializable()
 class BingWallPaper {
   String date;
   String headline;
@@ -5,7 +10,6 @@ class BingWallPaper {
   String description;
   String image_url;
   String main_text;
-
 
   BingWallPaper(
       {required this.date,
@@ -15,22 +19,7 @@ class BingWallPaper {
       required this.image_url,
       required this.main_text});
 
-  BingWallPaper.fromJson(Map<String, dynamic> json)
-      : date = json['date'],
-        headline = json['headline'],
-        title = json['title'],
-        description = json['description'],
-        image_url = json['image_url'],
-        main_text = json['main_text'];
-
-  Map<String, dynamic> toJson() {
-    return {
-      'date': date,
-      'headline': headline,
-      'title': title,
-      'description': description,
-      'image_url': image_url,
-      'main_text': main_text,
-    };
-  }
+  factory BingWallPaper.fromJson(Map<String, dynamic> json) =>
+      _$BingWallPaperFromJson(json);
+  Map<String, dynamic> toJson() => _$BingWallPaperToJson(this);
 }

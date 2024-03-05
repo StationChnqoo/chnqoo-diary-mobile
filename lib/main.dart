@@ -82,7 +82,9 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Get.put(GetStores());
+    var stores =  Get.put(GetStores());
+        ever(stores.user, (value) {
+    });
     // Get.updateLocale(Locale('zh', 'CN'));
   }
 

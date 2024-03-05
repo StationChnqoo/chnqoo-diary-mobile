@@ -1,44 +1,21 @@
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
+import 'package:chnqoo_diary_mobile/constants/mock.dart';
 import 'package:chnqoo_diary_mobile/constants/user.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-dynamic DEFAULT_USER = {
-  "id": "",
-  "idQoo": "登录后才能拥有 ~",
-  "idCard": "",
-  "mobile": "",
-  "email": "",
-  "smsCode": "",
-  "smsTime": "",
-  "name": "",
-  "nickname": "请登录 ~",
-  "password": "",
-  "avatar": "",
-  "motto": "",
-  "linkQq": "",
-  "linkWechat": "",
-  "isDeleted": false,
-  "createTime": "",
-  "updateTime": ""
-};
-
-dynamic DEAULT_BING_WALL_PAPER = {
-  "date": "2023-08-19",
-  'headline': "我准备好拍特写了，松鼠先生",
-  'title': "看着相机镜头的松鼠",
-  'description':
-      "1839年的8月19日，法国画家达盖尔公布了其发明的达盖尔摄影法，即银版摄影法，这被认为是最早的具有实用价值的摄影法。因此每年的8月19日被定位世界摄影日。摄影的世界是广阔的，专业人士和业余爱好者所涉足的摄影主题和风格也是多种多样的。无论是抽象还是时尚，抑或是风景和野生动物，都可以成为摄影的主题。图上这只厚脸皮的松鼠就是一个例子。尽管随着数码相机和智能手机的问世，达盖尔摄影法之类的老式摄影法早已过时，但却仍有一些摄影师还在竭力保持老式摄影的魅力和艺术性。",
-  'image_url':
-      "https://cn.bing.com/th?id=OHR.CameraSquirrel_ZH-CN3580119980_1920x1080.webp",
-  'main_text': "世界上第一张照片是由法国科学家约瑟夫·尼塞福尔·涅普斯在1826年拍摄出来的。"
-};
-
 class GetStores extends GetxController {
+  /** 页面刷新 */
+  /** 结构简单，直接修改value */
   var homePage = 0.obs;
-  var user = User.fromJson(DEFAULT_USER).obs;
-  var bingWallPaper = BingWallPaper.fromJson(DEAULT_BING_WALL_PAPER).obs;
+  /** 变量缓存 */
+  /** 结构复杂，必须通过暴露出来的Set/Get接口修改 */
   final storage = GetStorage();
+  var user = User.fromJson(Mock().initUser()).obs;
+  var bingWallPaper = BingWallPaper.fromJson(Mock().initBingWallPaper()).obs;
+  /** 系统变量 */
+  /** 无需缓存，原则上是只能在Stores内部进行修改 */
+  var isSignIn = false.obs;
 
   GetStores() {
     var userCache = storage.read('user');
@@ -51,8 +28,11 @@ class GetStores extends GetxController {
     }
   }
 
-  void refreshHomePage() {
-    homePage.value++;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    everAll([homePage, user, bingWallPaper, isSignIn], (callback) {});
   }
 
   void setBingWallPaper(BingWallPaper bwp) {
@@ -66,6 +46,6 @@ class GetStores extends GetxController {
   }
 
   void clearUser() {
-    setUser(User.fromJson(DEFAULT_USER));
+    setUser(User.fromJson(Mock().initUser()));
   }
 }

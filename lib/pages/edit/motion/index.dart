@@ -1,4 +1,4 @@
-import 'package:chnqoo_diary_mobile/constants/motion_item.dart';
+import 'package:chnqoo_diary_mobile/constants/motion.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/emoji_selector.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
@@ -14,7 +14,7 @@ class EditMotionPage extends StatefulWidget {
 
 class EditMotionPageState extends State<EditMotionPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  MotionItem motionItem = MotionItem.buildDefaultMotionItem();
+  Motion motionItem = Motion.buildDefaultMotionItem();
 
   void onEmojiPress(String s) {
     motionItem.emoji = s;
@@ -33,7 +33,7 @@ class EditMotionPageState extends State<EditMotionPage> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(
-                height: 6,
+                height: 12,
               ),
               MyCard(
                 child: TextField(
@@ -57,6 +57,9 @@ class EditMotionPageState extends State<EditMotionPage> {
                 height: 12,
               ),
               EditBottons(onDeletePress: () {}, onSavePress: () {}),
+              SizedBox(
+                height: 12,
+              ),
             ]),
           ),
         ));

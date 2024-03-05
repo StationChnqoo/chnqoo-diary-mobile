@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
+import 'package:chnqoo_diary_mobile/constants/mock.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
@@ -35,12 +36,12 @@ class HomePageState extends State<HomePage> {
   GetStores stores = Get.find<GetStores>();
 
   onMinePress() {
-    // Get.dialog(Text('呵呵'));
-    if (x.isNull(stores.user.value.id)) {
-      Get.toNamed(RoutesClass.LOGIN);
-    } else {
-      scaffoldKey.currentState?.openDrawer();
-    }
+    scaffoldKey.currentState?.openDrawer();
+    // if (x.isNull(stores.user.value.id)) {
+    //   Get.toNamed(RoutesClass.LOGIN);
+    // } else {
+    //   scaffoldKey.currentState?.openDrawer();
+    // }
   }
 
   onFloatMenuPress(CommonMenu menu) {

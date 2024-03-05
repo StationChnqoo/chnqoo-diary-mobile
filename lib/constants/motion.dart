@@ -1,39 +1,43 @@
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 
-class NoteItem {
+class Motion {
   String id;
   String userId;
   String content;
+  String emoji;
   List<String> images;
   bool isDeleted;
   bool isPublic;
   String createTime;
   String updateTime;
 
-  NoteItem(
+  Motion(
       {required this.id,
       required this.userId,
       required this.content,
+      required this.emoji,
       required this.images,
       required this.isDeleted,
       required this.isPublic,
       required this.createTime,
       required this.updateTime});
 
-  static buildDefaultNoteItem() => NoteItem(
+  static buildDefaultMotionItem() => Motion(
       id: '',
       userId: '',
       content: '',
+      emoji: '吃瓜.png',
       images: [],
       isDeleted: false,
       isPublic: false,
       createTime: x.useCurrentTime(),
       updateTime: x.useCurrentTime());
 
-  NoteItem.fromJson(Map<String, dynamic> json)
+  Motion.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         userId = json['userId'],
         content = json['content'],
+        emoji = json['emoji'],
         isDeleted = json['isDeleted'],
         isPublic = json['isPublic'],
         createTime = json['createTime'],
@@ -45,6 +49,7 @@ class NoteItem {
       'id': id,
       'userId': userId,
       'content': content,
+      'emoji': emoji,
       'images': images.join('::'),
       'isDeleted': isDeleted,
       'isPublic': isPublic,
