@@ -49,7 +49,9 @@ class Services {
         sendTimeout: Duration(seconds: 10),
         connectTimeout: Duration(seconds: 10),
         // http://192.168.0.102:21981/api/chnqoo-notebook
-        baseUrl: Config.SERVER,
+        // http://192.168.0.102:21981
+        baseUrl: 'http://192.168.0.104:21981',
+        // baseUrl: Config.SERVER,
         headers: Map.from(
             {'t': milliseconds, 's': x.useMD5(milliseconds.toString())}));
 

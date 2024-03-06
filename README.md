@@ -62,6 +62,21 @@ static String useConfigDotenvFile(String package) {
 
 flutter pub run build_runner build
 
+## 接口
+
+### 接口安全
+
+基本的`t`/`s` -> `MD5`键值对
+
+- 前端：时间戳`t`和特定规则对`t`加密的`s`
+
+- 后端：时间戳`t`和服务器时间 `<10s`，符合`MD5`的规则
+
+```bash
+curl --location 'http://192.168.0.104:21981/sendSms.do?mobile=15552198996'
+--header 't: 1709672743504' --header 's: e7bc7ce3f287eb2c05e732c21d106a55'
+```
+
 ## Thanks
 
 - Material Design 3 https://www.fluttericon.cn/
