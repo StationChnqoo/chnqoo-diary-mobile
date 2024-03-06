@@ -3,6 +3,7 @@ import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EmojiSelector extends StatefulWidget {
   final String emoji;
@@ -36,8 +37,10 @@ class EmojiSelectorState extends State<EmojiSelector> {
           children: [
             Row(
               children: [
-                Image.network('${Config.CDN}/wechat/${widget.emoji}',
-                    height: 24, width: 24),
+                CachedNetworkImage(
+                    imageUrl: '${Config.CDN}/wechat/${widget.emoji}',
+                    height: 24,
+                    width: 24),
                 SizedBox(
                   width: 4,
                 ),
@@ -100,11 +103,11 @@ class EmojiSelectorState extends State<EmojiSelector> {
                                               ? Theme.of(context).primaryColor
                                               : Colors.transparent)),
                                   child: Center(
-                                    child: Image.network(
-                                        '${Config.CDN}/wechat/${e}',
-                                        height: emojiContainerSize - 12,
-                                        width: emojiContainerSize - 12),
-                                  ),
+                                      child: CachedNetworkImage(
+                                    imageUrl: '${Config.CDN}/wechat/${e}',
+                                    width: emojiContainerSize - 12,
+                                    height: emojiContainerSize - 12,
+                                  )),
                                 ),
                               ),
                             )

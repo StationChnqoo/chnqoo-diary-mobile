@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MyAvatar extends StatelessWidget {
@@ -17,8 +18,8 @@ class MyAvatar extends StatelessWidget {
             child: isUselessUrl
                 ? Image.asset('assets/common_avatar_unknown.png',
                     width: size, height: size, fit: BoxFit.fill)
-                : Image.network(
-                    url,
+                : CachedNetworkImage(
+                    imageUrl: url,
                     width: size,
                     height: size,
                     fit: BoxFit.fill,

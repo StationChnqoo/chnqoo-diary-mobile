@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
@@ -94,8 +95,8 @@ class ImagesSelectorState extends State<ImagesSelector> {
                     style: TextStyle(
                         fontSize: 16, color: Theme.of(context).primaryColor)),
                 ClipRRect(
-                  child: Image.network(
-                    e,
+                  child: CachedNetworkImage(
+                    imageUrl: e,
                     height: 36.w,
                     width: 36.w,
                     fit: BoxFit.cover,

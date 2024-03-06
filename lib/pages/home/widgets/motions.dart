@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +62,9 @@ class HomeMotions extends StatelessWidget {
                               SizedBox(
                                 width: 6,
                               ),
-                              Image.network(
-                                '${dotenv.get('CDN')}/wechat/%E5%90%83%E7%93%9C.png',
+                              CachedNetworkImage(
+                                imageUrl:
+                                    '${dotenv.get('CDN')}/wechat/%E5%90%83%E7%93%9C.png',
                                 height: 18,
                               ),
                             ],

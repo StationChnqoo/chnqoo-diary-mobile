@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
@@ -113,8 +114,9 @@ class HomePageState extends State<HomePage> {
                         return Container(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              '${dotenv.get('CDN')}/home-banner-${i}.jpg',
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  '${dotenv.get('CDN')}/home-banner-${i}.jpg',
                               width: MediaQuery.of(context).size.width - 24,
                               height: double.maxFinite,
                               fit: BoxFit.fill,

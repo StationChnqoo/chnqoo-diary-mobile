@@ -16,7 +16,7 @@ class GetStores extends GetxController {
   /** 系统变量 */
   /** 无需缓存，原则上是只能在Stores内部进行修改 */
   var isSignIn = false.obs;
-
+  
   GetStores() {
     var userCache = storage.read('user');
     if (userCache != null) {

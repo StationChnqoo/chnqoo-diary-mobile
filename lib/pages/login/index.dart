@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
@@ -84,8 +85,8 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Image.network(
-                  '${dotenv.get('CDN')}/logo-login.png',
+                CachedNetworkImage(
+                  imageUrl: '${dotenv.get('CDN')}/logo-login.png',
                   height: 56.w,
                   width: 56.w,
                 ),

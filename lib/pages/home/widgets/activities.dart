@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -55,8 +56,8 @@ class HomeActivities extends StatelessWidget {
                         ),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            '${dotenv.get("CDN")}/activity-1.jpg',
+                          child: CachedNetworkImage(
+                            imageUrl: '${dotenv.get("CDN")}/activity-1.jpg',
                             height: 72.w,
                             width: 72.w,
                           ),
