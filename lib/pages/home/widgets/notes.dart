@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:chnqoo_diary_mobile/constants/note_count.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeNotes extends StatelessWidget {
   @override
@@ -33,7 +32,9 @@ class HomeNotes extends StatelessWidget {
                   size: 16,
                   color: Colors.black54,
                 ),
-                onPress: () {},
+                onPress: () {
+                  Get.toNamed(RoutesClass.LIST_NOTE);
+                },
                 reverse: true,
               )
             ],

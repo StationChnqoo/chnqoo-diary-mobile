@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeMotions extends StatelessWidget {
   @override
@@ -31,7 +33,9 @@ class HomeMotions extends StatelessWidget {
                       size: 16,
                       color: Colors.black54,
                     ),
-                    onPress: () {},
+                    onPress: () {
+                      Get.toNamed(RoutesClass.LIST_NOTE);
+                    },
                     reverse: true,
                   )
                 ],

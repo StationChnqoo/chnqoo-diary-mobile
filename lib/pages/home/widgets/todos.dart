@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeTodos extends StatelessWidget {
   @override
@@ -25,6 +27,18 @@ class HomeTodos extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
+                  MyIconButton(
+                    height: 32.w,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Colors.black54,
+                    ),
+                    onPress: () {
+                      Get.toNamed(RoutesClass.LIST_TODO);
+                    },
+                    reverse: true,
+                  )
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
