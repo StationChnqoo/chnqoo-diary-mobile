@@ -15,7 +15,6 @@ class HomeSeachBar extends StatelessWidget {
         ]),
         width: double.infinity,
         height: 32.w,
-        // margin: EdgeInsets.symmetric(horizontal: 12),
         padding: EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.28),

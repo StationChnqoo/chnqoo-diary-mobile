@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/permission_check.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_app_bar.dart';
@@ -15,7 +16,7 @@ class PermissionPage extends StatefulWidget {
 class PermissionPageState extends State<PermissionPage>
     with WidgetsBindingObserver {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  
+
   List<PermissionCheck> datas = [];
 
   @override
@@ -30,9 +31,10 @@ class PermissionPageState extends State<PermissionPage>
             ),
             ...datas
                 .map((e) => Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Config.PAGE_PADDING, vertical: 6),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: Config.PAGE_PADDING, vertical: 6),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.white),

@@ -1,4 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/anniversary_item.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
@@ -66,7 +67,7 @@ class EditAnniversaryPageState extends State<EditAnniversaryPage> {
         appBar: MyAppBar(title: '编辑纪念日'),
         resizeToAvoidBottomInset: false,
         body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
             child: SingleChildScrollView(
               child: Column(
                 children: [

@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ class HomeTopics extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+        padding:
+            EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

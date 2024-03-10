@@ -11,6 +11,9 @@ class Config {
   static String CDN = dotenv.get('CDN');
   static String SERVER = dotenv.get('SERVER');
 
+  /** UI */
+  static double PAGE_PADDING = 15;
+
   /** 映射Config文件 */
   static String useConfigDotenvFile(String package) {
     const map = {

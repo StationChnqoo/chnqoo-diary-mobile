@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/motion.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/emoji_selector.dart';
@@ -28,7 +29,7 @@ class ListMotionPageState extends State<ListMotionPage> {
         appBar: MyAppBar(title: '编辑心情'),
         resizeToAvoidBottomInset: false,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

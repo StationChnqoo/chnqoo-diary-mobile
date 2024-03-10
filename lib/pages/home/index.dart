@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/constants/mock.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
@@ -97,7 +98,8 @@ class HomePageState extends State<HomePage> {
           HomeNotice(),
           Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              margin: EdgeInsets.symmetric(
+                  horizontal: Config.PAGE_PADDING, vertical: 6),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12), color: Colors.white),
               child: MyCard(

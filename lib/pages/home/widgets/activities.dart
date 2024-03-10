@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,7 +19,8 @@ class HomeActivities extends StatelessWidget {
               '平台近期违规用户处罚公示 ~',
             ]
                 .map((e) => Container(
-                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: Config.PAGE_PADDING, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       // color: Colors.white

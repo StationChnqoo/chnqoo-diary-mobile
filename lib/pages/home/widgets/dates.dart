@@ -1,10 +1,9 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_icon_button.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 
 class HomeDates extends StatelessWidget {
@@ -12,7 +11,8 @@ class HomeDates extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+        margin:
+            EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

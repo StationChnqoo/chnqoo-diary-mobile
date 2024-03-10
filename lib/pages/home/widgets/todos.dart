@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/routes/routes.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_check_box.dart';
@@ -13,7 +14,8 @@ class HomeTodos extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+        margin:
+            EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING, vertical: 5),
         child: MyCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/constants/todo.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
@@ -26,7 +27,7 @@ class ListTodoPageState extends State<ListTodoPage> {
         appBar: MyAppBar(title: '编辑待办事项'),
         resizeToAvoidBottomInset: false,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

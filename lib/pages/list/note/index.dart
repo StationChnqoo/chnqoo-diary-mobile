@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/note.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/bottoms.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/widgets/images_selector.dart';
@@ -23,7 +24,7 @@ class ListNotePageState extends State<ListNotePage> {
         appBar: MyAppBar(title: '编辑笔记'),
         resizeToAvoidBottomInset: false,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

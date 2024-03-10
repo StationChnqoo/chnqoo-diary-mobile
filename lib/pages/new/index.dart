@@ -1,4 +1,5 @@
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
+import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/pages/new/widgets/menu.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
@@ -29,7 +30,7 @@ class NewPageState extends State<NewPage> with WidgetsBindingObserver {
         key: scaffoldKey,
         body: SafeArea(
             child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -30,85 +30,84 @@ class MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      decoration: BoxDecoration(),
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.width * 9 / 16,
-            width: double.infinity,
-            padding: EdgeInsets.only(top: 44),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    // colorFilter: ColorFilter.matrix(x.useGreyImageFilter()),
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.38), BlendMode.darken),
-                    fit: BoxFit.fitWidth,
-                    image: CachedNetworkImageProvider(
-                        stores.bingWallPaper.value.image_url))),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Obx(() => MyAvatar(
-                      url: stores.user.value.avatar,
-                      size: 66.w,
-                      onPress: () {})),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Obx(() => Text(
-                        stores.user.value.nickname,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      )),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Obx(() => Text('笔记号码: ' + stores.user.value.idQoo,
-                      style: TextStyle(fontSize: 14, color: Colors.white))),
-                ],
-              ),
+    return SafeArea(
+        child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
-          Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
+            Container(
+              height: (MediaQuery.of(context).size.width - 24) * 9 / 16,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                      // colorFilter: ColorFilter.matrix(x.useGreyImageFilter()),
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.58), BlendMode.darken),
+                      fit: BoxFit.fitWidth,
+                      image: CachedNetworkImageProvider(
+                          stores.bingWallPaper.value.image_url))),
+              child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(12),
-                      child: MyCard(
-                          child: Column(
-                        children: [
-                          ...CommonMenu.loadDrawerMenus()
-                              .map((e) =>
-                                  MyListTile(menu: e, onPress: onMenuPress))
-                              .toList(),
-                        ],
-                      )),
-                    ),
-                    // SizedBox(
-                    //   height: 10,
-                    // ),
-                    // Container(
-                    //   padding: EdgeInsets.symmetric(horizontal: 16),
-                    //   child: MyOutlineButton(
-                    //       onPress: onLoginOutPress,
-                    //       text: '退出登录',
-                    //       icon: Icon(Icons.power_off_outlined)),
-                    // ),
+                    Obx(() => MyAvatar(
+                        url: stores.user.value.avatar,
+                        size: 66.w,
+                        onPress: () {})),
                     SizedBox(
-                      height: 32,
+                      height: 4,
                     ),
+                    Obx(() => Text(
+                          stores.user.value.nickname,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        )),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Obx(() => Text('笔记号码: ' + stores.user.value.idQoo,
+                        style: TextStyle(fontSize: 14, color: Colors.white))),
                   ],
                 ),
-              ))
-        ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: MyCard(
+                  child: Column(
+                children: [
+                  ...CommonMenu.loadDrawerMenus()
+                      .map((e) => MyListTile(menu: e, onPress: onMenuPress))
+                      .toList(),
+                ],
+              )),
+            ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: 16),
+            //   child: MyOutlineButton(
+            //       onPress: onLoginOutPress,
+            //       text: '退出登录',
+            //       icon: Icon(Icons.power_off_outlined)),
+            // ),
+            SizedBox(
+              height: 32,
+            ),
+          ],
+        ),
       ),
-    );
+    ));
   }
 
   @override
