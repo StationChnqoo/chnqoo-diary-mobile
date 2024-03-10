@@ -97,7 +97,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '记了吗',
+                      '小烂笔头',
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black87,
@@ -119,7 +119,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               height: 10,
             ),
             Text(
-              "Hi~ 欢迎使用记了吗",
+              "Hi~ 欢迎使用小烂笔头",
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -155,7 +155,7 @@ class LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
             ),
             Container(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: FilledButton (
                   onPressed: () => onLoginPress(),
                   child: Text('获取验证码'),
                   // style: ButtonStyle(

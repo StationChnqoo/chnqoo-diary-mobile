@@ -37,12 +37,12 @@ class HomePageState extends State<HomePage> {
   GetStores stores = Get.find<GetStores>();
 
   onMinePress() {
-    scaffoldKey.currentState?.openDrawer();
-    // if (x.isNull(stores.user.value.id)) {
-    //   Get.toNamed(RoutesClass.LOGIN);
-    // } else {
-    //   scaffoldKey.currentState?.openDrawer();
-    // }
+    // scaffoldKey.currentState?.openDrawer();
+    if (x.isNull(stores.user.value.id)) {
+      Get.toNamed(RoutesClass.LOGIN);
+    } else {
+      scaffoldKey.currentState?.openDrawer();
+    }
   }
 
   onFloatMenuPress(CommonMenu menu) {
@@ -81,7 +81,7 @@ class HomePageState extends State<HomePage> {
                     ),
                     MyAvatar(
                         url: stores.user.value.avatar,
-                        size: 44.w,
+                        size: 36.w,
                         onPress: () {
                           onMinePress();
                         })

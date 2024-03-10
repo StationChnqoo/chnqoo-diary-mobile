@@ -23,7 +23,7 @@ class EditTodoPageState extends State<EditTodoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        appBar: MyAppBar(title: '编辑待办事项'),
+        appBar: MyAppBar(title: '待办事项'),
         resizeToAvoidBottomInset: false,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 12),

@@ -66,12 +66,12 @@ class CommonMenu {
           page: RoutesClass.EDIT_NOTE),
       CommonMenu(
           id: '',
-          name: '纪念日',
+          name: '大事',
           icon: Icons.event_note_outlined,
           page: RoutesClass.EDIT_ANNIVERSARY),
       CommonMenu(
           id: '',
-          name: '代办事项',
+          name: '代办',
           icon: Icons.checklist_outlined,
           page: RoutesClass.EDIT_TODO)
     ];

@@ -1,3 +1,4 @@
+import 'package:chnqoo_diary_mobile/pages/app.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/anniversary/index.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/diary/index.dart';
 import 'package:chnqoo_diary_mobile/pages/edit/motion/index.dart';
@@ -15,7 +16,8 @@ import 'package:chnqoo_diary_mobile/pages/sms/index.dart';
 import 'package:get/get.dart';
 
 class RoutesClass {
-  static String HOME = "/";
+  static String APP = "/";
+  static String HOME = "/home";
   static String PERMISSION = "/permission";
   static String SMS = "/sms";
   static String LOGIN = "/login";
@@ -31,6 +33,7 @@ class RoutesClass {
   static String LIST_TODO = "/list/todo";
 
   static List<GetPage> routes = [
+    GetPage(name: APP, page: () => App()),
     GetPage(name: HOME, page: () => const HomePage()),
     GetPage(
       name: PERMISSION,

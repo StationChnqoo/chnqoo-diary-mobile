@@ -71,7 +71,7 @@ class ChnqooDiaryMobileState extends State<ChnqooDiaryMobile> {
         }
         return newWidget;
       },
-      initialRoute: RoutesClass.HOME,
+      initialRoute: RoutesClass.APP,
       getPages: RoutesClass.routes,
       defaultTransition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 360),
