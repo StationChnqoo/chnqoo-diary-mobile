@@ -1,7 +1,9 @@
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
 import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
+import 'package:chnqoo_diary_mobile/pages/new/widgets/diary.dart';
 import 'package:chnqoo_diary_mobile/pages/new/widgets/menu.dart';
+import 'package:chnqoo_diary_mobile/pages/new/widgets/mood.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,7 +71,6 @@ class NewPageState extends State<NewPage> with WidgetsBindingObserver {
                 flex: 1,
                 child: MyCard(
                   child: Container(
-                    width: double.infinity,
                     padding: EdgeInsets.symmetric(vertical: 4),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,6 +83,8 @@ class NewPageState extends State<NewPage> with WidgetsBindingObserver {
                         SizedBox(
                           height: 8,
                         ),
+                        DiaryItem(),
+                        MoodItem()
                       ],
                     ),
                   ),

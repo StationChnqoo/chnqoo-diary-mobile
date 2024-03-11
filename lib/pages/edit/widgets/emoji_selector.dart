@@ -26,7 +26,8 @@ class EmojiSelectorState extends State<EmojiSelector> {
   Widget build(BuildContext context) {
     // TODO: implement build
     int emojiContainerSize =
-        ((MediaQuery.of(context).size.width - 24 - 24) / 8).toInt();
+        ((MediaQuery.of(context).size.width - Config.PAGE_PADDING * 2 - 24) / 8)
+            .toInt();
 
     return MyCard(
         child: Container(
