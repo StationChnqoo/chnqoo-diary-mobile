@@ -4,6 +4,7 @@ import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
 import 'package:chnqoo_diary_mobile/pages/new/widgets/diary.dart';
 import 'package:chnqoo_diary_mobile/pages/new/widgets/menu.dart';
 import 'package:chnqoo_diary_mobile/pages/new/widgets/mood.dart';
+import 'package:chnqoo_diary_mobile/pages/new/widgets/note.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,24 +70,24 @@ class NewPageState extends State<NewPage> with WidgetsBindingObserver {
               ),
               Expanded(
                 flex: 1,
-                child: MyCard(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '预览',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        DiaryItem(),
-                        MoodItem()
-                      ],
-                    ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 4, horizontal: Config.PAGE_PADDING),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '预览',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      DiaryItem(),
+                      MoodItem(),
+                      NoteItem()
+                    ],
                   ),
                 ),
               ),

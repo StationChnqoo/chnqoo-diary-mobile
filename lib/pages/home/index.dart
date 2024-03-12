@@ -89,66 +89,71 @@ class HomePageState extends State<HomePage> {
                   ],
                 ),
               ))),
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
-          SizedBox(
-            height: 6,
-          ),
-          HomeNotice(),
-          Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(
-                  horizontal: Config.PAGE_PADDING, vertical: 6),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12), color: Colors.white),
-              child: MyCard(
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    height: (MediaQuery.of(context).size.width - 32) * 0.25,
-                    viewportFraction: 0.66,
-                    enlargeCenterPage: true,
-                  ),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  '${dotenv.get('CDN')}/home-banner-${i}.jpg',
-                              width: MediaQuery.of(context).size.width - 24,
-                              height: double.maxFinite,
-                              fit: BoxFit.fill,
+      body: Container(
+        decoration: BoxDecoration(color: Color(0xfff6f8fa)),
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            SizedBox(
+              height: 6,
+            ),
+            HomeNotice(),
+            Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(
+                    horizontal: Config.PAGE_PADDING, vertical: 6),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white),
+                child: MyCard(
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      height: (MediaQuery.of(context).size.width - 32) * 0.25,
+                      viewportFraction: 0.66,
+                      enlargeCenterPage: true,
+                    ),
+                    items: [1, 2, 3, 4, 5].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    '${dotenv.get('CDN')}/home-banner-${i}.jpg',
+                                width: MediaQuery.of(context).size.width - 24,
+                                height: double.maxFinite,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-              )),
-          HomeNotes(),
-          HomeTodos(),
-          HomeDates(),
-          HomeMotions(),
-          HomeTopics(),
-          HomeActivities(),
-          Container(
-              margin: EdgeInsets.all(12),
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
-              child: Center(
-                child: Text(
-                  'Env: ${dotenv.get('ENV')}',
-                  style: TextStyle(color: Colors.black38, fontSize: 12),
-                ),
-              ))
-        ],
-      )),
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                )),
+            HomeNotes(),
+            HomeTodos(),
+            HomeDates(),
+            HomeMotions(),
+            HomeTopics(),
+            HomeActivities(),
+            Container(
+                margin: EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Center(
+                  child: Text(
+                    'Env: ${dotenv.get('ENV')}',
+                    style: TextStyle(color: Colors.black38, fontSize: 12),
+                  ),
+                ))
+          ],
+        )),
+      ),
       drawer: SlideMenu(),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
@@ -172,7 +177,7 @@ class HomePageState extends State<HomePage> {
               )
               .toList()
         ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 
