@@ -12,74 +12,38 @@ class HomeMotions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-        padding:
-            EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING, vertical: 5),
-        child: MyCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    '心情',
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  MyIconButton(
-                    height: 32.w,
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: Colors.black54,
-                    ),
-                    onPress: () {
-                      Get.toNamed(RoutesClass.LIST_NOTE);
-                    },
-                    reverse: true,
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Column(
-                children: [1, 2, 3]
-                    .map(
-                      (e) => Container(
-                          // color: Colors.white,
-                          margin: EdgeInsets.symmetric(vertical: 2),
-                          child: Row(
-                            children: [
-                              Text(
-                                '12:34',
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 14),
-                              ),
-                              SizedBox(
-                                width: 6,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                '您今天还记录心情，啥也不是 ...',
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.black87),
-                              )),
-                              SizedBox(
-                                width: 6,
-                              ),
-                              CachedNetworkImage(
-                                imageUrl:
-                                    '${dotenv.get('CDN')}/wechat/%E5%90%83%E7%93%9C.png',
-                                height: 18,
-                              ),
-                            ],
-                          )),
-                    )
-                    .toList(),
-              )
-            ],
-          ),
-        ));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              '我的心情',
+              style: TextStyle(color: Colors.black54, fontSize: 12),
+            ),
+            CachedNetworkImage(
+              imageUrl: '${dotenv.get('CDN')}/wechat/%E5%90%83%E7%93%9C.png',
+              height: 18,
+            ),
+          ],
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Container(
+            // color: Colors.white,
+            margin: EdgeInsets.symmetric(vertical: 2),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  '您今天还记录心情，啥也不是 ...',
+                  style: TextStyle(fontSize: 12, color: Colors.black87),
+                )),
+              ],
+            ))
+      ],
+    );
   }
 }

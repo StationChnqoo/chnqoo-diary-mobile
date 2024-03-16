@@ -16,8 +16,8 @@ import 'package:chnqoo_diary_mobile/pages/sms/index.dart';
 import 'package:get/get.dart';
 
 class RoutesClass {
-  static String APP = "/";
-  static String HOME = "/home";
+  static String APP = "/app";
+  static String HOME = "/";
   static String PERMISSION = "/permission";
   static String SMS = "/sms";
   static String LOGIN = "/login";

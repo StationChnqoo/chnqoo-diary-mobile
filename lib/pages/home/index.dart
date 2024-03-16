@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
@@ -24,6 +26,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,12 +41,12 @@ class HomePageState extends State<HomePage> {
   GetStores stores = Get.find<GetStores>();
 
   onMinePress() {
-    // scaffoldKey.currentState?.openDrawer();
-    if (x.isNull(stores.user.value.id)) {
-      Get.toNamed(RoutesClass.LOGIN);
-    } else {
-      scaffoldKey.currentState?.openDrawer();
-    }
+    scaffoldKey.currentState?.openDrawer();
+    // if (x.isNull(stores.user.value.id)) {
+    //   Get.toNamed(RoutesClass.LOGIN);
+    // } else {
+    //   scaffoldKey.currentState?.openDrawer();
+    // }
   }
 
   onFloatMenuPress(CommonMenu menu) {
@@ -121,7 +124,7 @@ class HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(12),
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    '${dotenv.get('CDN')}/home-banner-${i}.jpg',
+                                    '${dotenv.get('CDN')}/mock/home-banner-${i}.jpg',
                                 width: MediaQuery.of(context).size.width - 24,
                                 height: double.maxFinite,
                                 fit: BoxFit.fill,
@@ -133,24 +136,36 @@ class HomePageState extends State<HomePage> {
                     }).toList(),
                   ),
                 )),
-            HomeNotes(),
-            HomeTodos(),
-            HomeDates(),
-            HomeMotions(),
-            HomeTopics(),
             HomeActivities(),
+            SizedBox(
+              height: 12,
+            ),
             Container(
-                margin: EdgeInsets.all(12),
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12)),
-                child: Center(
-                  child: Text(
-                    'Env: ${dotenv.get('ENV')}',
-                    style: TextStyle(color: Colors.black38, fontSize: 12),
-                  ),
-                ))
+              padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
+              child: MasonryGridView.count(
+                itemCount: 20,
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                itemBuilder: (context, index) {
+                  int SIZE = 10;
+                  return Container(
+                    width: double.infinity,
+                    child: MyCard(
+                        child: [
+                      HomeTodos(),
+                      HomeMotions(),
+                      HomeNotes()
+                    ][Random().nextInt(3)]),
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            )
           ],
         )),
       ),
