@@ -21,7 +21,7 @@ class MyCheckBox extends StatelessWidget {
               : 'assets/checkbox_status_0.png',
           height: size,
           width: size,
-          color: value ? Colors.black26 : Theme.of(context).primaryColor),
+          color: value ? Theme.of(context).primaryColor : Colors.black26),
     );
     // return SizedBox(
     //     height: size,

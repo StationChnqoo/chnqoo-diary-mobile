@@ -77,19 +77,6 @@ class MyPageState extends State<MyPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: MyCard(
-                  child: Column(
-                children: [
-                  ...CommonMenu.loadDrawerMenus()
-                      .map((e) => MyListTile(menu: e, onPress: onMenuPress))
-                      .toList(),
-                ],
-              )),
-            ),
             // SizedBox(
             //   height: 10,
             // ),

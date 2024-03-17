@@ -13,10 +13,30 @@ class CommonMenu {
       required this.icon,
       required this.page});
 
-  static List<CommonMenu> loadDrawerMenus() {
+  static List<CommonMenu> loadSlidePopularMenus() {
     return [
       CommonMenu(
           id: 'account', name: '账号设置', icon: Icons.fingerprint, page: ''),
+      CommonMenu(
+          id: 'upgrade',
+          name: '版本升级',
+          icon: Icons.rocket_launch_outlined,
+          page: ''),
+      CommonMenu(
+          id: RoutesClass.PERMISSION,
+          name: '权限管理',
+          icon: Icons.vpn_key,
+          page: ''),
+      CommonMenu(
+          id: 'role',
+          name: '切换身份',
+          icon: Icons.swipe_vertical_outlined,
+          page: ''),
+    ];
+  }
+
+  static List<CommonMenu> loadSlideOtherMenus() {
+    return [
       CommonMenu(
           id: 'bug', name: '意见征集', icon: Icons.bug_report_outlined, page: ''),
       CommonMenu(
@@ -28,22 +48,12 @@ class CommonMenu {
           page: ''),
       CommonMenu(
           id: 'evaluate', name: '评价管理', icon: Icons.commute_outlined, page: ''),
-      CommonMenu(
-          id: RoutesClass.PERMISSION,
-          name: '权限管理',
-          icon: Icons.vpn_key,
-          page: ''),
       CommonMenu(id: 'rule', name: '平台规则', icon: Icons.rule, page: ''),
       CommonMenu(
           id: 'donate',
           name: '捐赠支持',
           icon: Icons.card_giftcard_outlined,
-          page: ''),
-      CommonMenu(
-          id: 'role',
-          name: '切换身份',
-          icon: Icons.swipe_vertical_outlined,
-          page: ''),
+          page: '')
     ];
   }
 

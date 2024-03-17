@@ -1,32 +1,18 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chnqoo_diary_mobile/constants/bing_wall_paper.dart';
 import 'package:chnqoo_diary_mobile/constants/common_menu.dart';
-import 'package:chnqoo_diary_mobile/constants/config.dart';
 import 'package:chnqoo_diary_mobile/constants/get_stores.dart';
-import 'package:chnqoo_diary_mobile/constants/mock.dart';
 import 'package:chnqoo_diary_mobile/constants/services.dart';
 import 'package:chnqoo_diary_mobile/constants/x.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/activities.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/dates.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/motions.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/notes.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/notice.dart';
+import 'package:chnqoo_diary_mobile/pages/home/widgets/my_page.dart';
 import 'package:chnqoo_diary_mobile/pages/home/widgets/search_bar.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/todos.dart';
-import 'package:chnqoo_diary_mobile/pages/home/widgets/topics.dart';
-import 'package:chnqoo_diary_mobile/routes/routes.dart';
+import 'package:chnqoo_diary_mobile/pages/home/widgets/social_page.dart';
 import 'package:chnqoo_diary_mobile/widgets/my_avatar.dart';
-import 'package:chnqoo_diary_mobile/widgets/my_card.dart';
 import 'package:chnqoo_diary_mobile/widgets/slide_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,7 +21,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   ScrollController? swiper;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GetStores stores = Get.find<GetStores>();
@@ -56,6 +43,8 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 2, vsync: this);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -79,6 +68,40 @@ class HomePageState extends State<HomePage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      width: 84.w,
+                      child: TabBar(
+                        dividerHeight: 0,
+                        labelPadding: EdgeInsets.symmetric(horizontal: 2),
+                        controller: _tabController,
+                        tabs: [
+                          ...['我的', '社区'].map((e) => Tab(
+                                child: Text(
+                                  e,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ))
+                        ],
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.white70,
+                        // add it here
+                        // indicator: MaterialIndicator(
+                        //   color: Colors.white,
+                        //   bottomLeftRadius: 5,
+                        //   bottomRightRadius: 5,
+                        //   horizontalPadding: 4,
+                        //   paintingStyle: PaintingStyle.fill,
+                        // ),
+                        indicator: DotIndicator(
+                          color: Colors.white,
+                          distanceFromCenter: 16,
+                          paintingStyle: PaintingStyle.fill,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
                     Expanded(child: HomeSeachBar()),
                     SizedBox(
                       width: 12,
@@ -92,83 +115,9 @@ class HomePageState extends State<HomePage> {
                   ],
                 ),
               ))),
-      body: Container(
-        decoration: BoxDecoration(color: Color(0xfff6f8fa)),
-        child: SingleChildScrollView(
-            child: Column(
-          children: [
-            SizedBox(
-              height: 6,
-            ),
-            HomeNotice(),
-            Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(
-                    horizontal: Config.PAGE_PADDING, vertical: 6),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white),
-                child: MyCard(
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      height: (MediaQuery.of(context).size.width - 32) * 0.25,
-                      viewportFraction: 0.66,
-                      enlargeCenterPage: true,
-                    ),
-                    items: [1, 2, 3, 4, 5].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    '${dotenv.get('CDN')}/mock/home-banner-${i}.jpg',
-                                width: MediaQuery.of(context).size.width - 24,
-                                height: double.maxFinite,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                )),
-            HomeActivities(),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: Config.PAGE_PADDING),
-              child: MasonryGridView.count(
-                itemCount: 20,
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                itemBuilder: (context, index) {
-                  int SIZE = 10;
-                  return Container(
-                    width: double.infinity,
-                    child: MyCard(
-                        child: [
-                      HomeTodos(),
-                      HomeMotions(),
-                      HomeNotes()
-                    ][Random().nextInt(3)]),
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            )
-          ],
-        )),
-      ),
+      body: TabBarView(
+          controller: _tabController,
+          children: [HomeMyPage(), HomeSocialPage(), Container()]),
       drawer: SlideMenu(),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
@@ -214,4 +163,8 @@ class HomePageState extends State<HomePage> {
     loadBingPicture();
     initGetStores();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => false;
 }
